@@ -13,7 +13,7 @@ namespace SelfieFriend.Services.Interface
         OfferingPostModel GetOfferingByFilePath(string path,string hostPort);
         void OfferChange(int offeringId,string filePath,int vkId, decimal price,string description, string title);
         void OfferChange(int offeringId, int vkId, decimal price, string description, string title);
-        void Create(string filePath, int vkId, decimal price, string description, string title);
+        void Create(string filePath, int vkId, decimal price, string description, string title, OfferingType offeringType);
         void CloseOffering(int vkId, int offeringId);
     }
 }

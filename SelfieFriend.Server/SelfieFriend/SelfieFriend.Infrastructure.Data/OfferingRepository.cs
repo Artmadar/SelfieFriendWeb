@@ -20,7 +20,7 @@ namespace SelfieFriend.Infrastructure.Data
         public List<Offering> GetList(OfferingType offeringType)
         {
             var offeringTypeId = (int)offeringType;
-            return _db.Offerings.Where(o => o.Closed == false && o.OfferingTypeId == offeringTypeId).ToList();
+            return _db.Offerings.Include(o => o.OfferingCategory).Where(o => o.Closed == false && o.OfferingTypeId == offeringTypeId).ToList();
         }
 
         //TODO: This crap should be rewrite!
@@ -44,7 +44,7 @@ namespace SelfieFriend.Infrastructure.Data
                 {
                     return _db.Offerings
                         .Include(o => o.User)
-                        .Include(o => o.OfferingPhoto)
+                        .Include(o => o.OfferingPhoto).Include(o => o.OfferingCategory)
                         .Where(o => o.Closed == false && o.User.VkId != vkId && o.OfferingTypeId == offeringTypeId)
                         .OrderByDescending(o => o.Id).Skip(startPosition).Take(offeringsCount - startPosition - 1)
                         .ToList();
@@ -69,7 +69,7 @@ namespace SelfieFriend.Infrastructure.Data
 
                 return _db.Offerings
                     .Include(o => o.User)
-                    .Include(o => o.OfferingPhoto)
+                    .Include(o => o.OfferingPhoto).Include(o => o.OfferingCategory)
                     .Where(o => o.Closed == false && o.User.VkId != vkId && o.OfferingTypeId == offeringTypeId)
                     .OrderByDescending(o=>o.Id).Skip(startPosition).Take(offeringsCount-startPosition)
                     .ToList();
@@ -81,7 +81,7 @@ namespace SelfieFriend.Infrastructure.Data
 
             return _db.Offerings
                 .Include(o => o.User)
-                .Include(o => o.OfferingPhoto)
+                .Include(o => o.OfferingPhoto).Include(o => o.OfferingCategory)
                 .Where(o => o.Closed == false && o.User.VkId != vkId && o.OfferingTypeId == offeringTypeId)
                 .OrderByDescending(o => o.Id).Skip(startPosition).Take(count)
                 .ToList();
@@ -100,6 +100,7 @@ namespace SelfieFriend.Infrastructure.Data
             return _db.Offerings
                 .Include(o => o.User)
                 .Include(o => o.OfferingPhoto)
+                .Include(o => o.OfferingCategory)
                 .Where(i => i.Closed == false && i.OfferingTypeId == offeringTypeId)
                 .ToList();
         }
@@ -111,13 +112,14 @@ namespace SelfieFriend.Infrastructure.Data
             return _db.Offerings
                 .Include(o => o.User)
                 .Include(o => o.OfferingPhoto)
+                .Include(o => o.OfferingCategory)
                 .Where(o => o.User.VkId == vkid && o.Closed == false && o.OfferingTypeId == offeringTypeId)
                 .ToList();
         }
 
         public Offering Get(int id)
         {
-            return _db.Offerings.Include(o => o.OfferingPhoto)
+            return _db.Offerings.Include(o => o.OfferingPhoto).Include(o => o.OfferingCategory)
                 .Include(o => o.User)
                 .FirstOrDefault(o => o.Id == id);
         }
@@ -125,7 +127,7 @@ namespace SelfieFriend.Infrastructure.Data
         public Offering GetByPhotoPath(string path)
         {
             return _db.Offerings
-                .Include(o => o.OfferingPhoto)
+                .Include(o => o.OfferingPhoto).Include(o => o.OfferingCategory)
                 .Include(o=>o.User)
                 .FirstOrDefault(o => o.OfferingPhoto.ImagePath == path);
 

@@ -111,8 +111,9 @@ namespace SelfieFriend.Infrastructure.Business
         }
 
         //need to test
-        public void Create(string filePath, int vkId, decimal price, string description, string title)
+        public void Create(string filePath, int vkId, decimal price, string description, string title, OfferingType offeringType)
         {
+            var offeringTypeId = (int)offeringType;
             var offering = new Offering();
             var photo = new OfferingPhoto();
 
@@ -123,6 +124,7 @@ namespace SelfieFriend.Infrastructure.Business
             offering.Desctiption = description;
             offering.Title = title;
             offering.DateCreated = DateTime.UtcNow;
+            offering.OfferingTypeId = offeringTypeId;
 
             _offeringRepository.Create(offering);
 
@@ -209,6 +211,8 @@ namespace SelfieFriend.Infrastructure.Business
                 offeringPostModel.Description = offering.Desctiption;
 
                 offeringPostModel.Checked = _inquiryService.IsExistInquiryOnOffering(vkId, offering.Id);
+
+                offeringPostModel.CategotyName = offering.OfferingCategory != null ? offering.OfferingCategory.Name : "NoCategory";
 
                 offeringModels.Add(offeringPostModel);
 

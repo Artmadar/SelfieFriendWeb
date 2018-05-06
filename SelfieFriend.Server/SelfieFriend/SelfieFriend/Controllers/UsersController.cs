@@ -1,4 +1,5 @@
-﻿using System.Web.Http;
+﻿using System.Net.Http;
+using System.Web.Http;
 using System.Web.Http.Cors;
 using SelfieFriend.Services.Interface;
 
@@ -19,6 +20,12 @@ namespace SelfieFriend.Controllers
         public object Get()
         {
             return _userServise.GetUserByVkId(UserId);   
+        }
+
+        public HttpResponseMessage ChangeData()
+        {
+
+            return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
         }
 
 

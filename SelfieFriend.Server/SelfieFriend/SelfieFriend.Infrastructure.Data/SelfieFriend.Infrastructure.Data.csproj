@@ -73,6 +73,14 @@
     <Compile Include="Migrations\201805060914466_AddOfferingsCategory.Designer.cs">
       <DependentUpon>201805060914466_AddOfferingsCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805060949102_FillOfferingsCategories.cs" />
+    <Compile Include="Migrations\201805060949102_FillOfferingsCategories.Designer.cs">
+      <DependentUpon>201805060949102_FillOfferingsCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.cs" />
+    <Compile Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.Designer.cs">
+      <DependentUpon>201805061027595_OfferingToOfferingCategoryRelations.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OfferingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -113,6 +121,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805060914466_AddOfferingsCategory.resx">
       <DependentUpon>201805060914466_AddOfferingsCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805060949102_FillOfferingsCategories.resx">
+      <DependentUpon>201805060949102_FillOfferingsCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.resx">
+      <DependentUpon>201805061027595_OfferingToOfferingCategoryRelations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

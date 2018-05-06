@@ -26,7 +26,9 @@ namespace SelfieFriend.Domain.Core
 
         public int OfferingTypeId { get; set; }
 
+        public int? OfferingCategoryId { get; set; }
 
+        public OfferingCategory OfferingCategory { get; set; }
 
         public bool Closed { get; set; }
 

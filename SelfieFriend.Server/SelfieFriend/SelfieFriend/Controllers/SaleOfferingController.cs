@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using SelfieFriend.Domain.Core;
+using SelfieFriend.Models;
+using SelfieFriend.Services.Interface;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using SelfieFriend.Domain.Core;
-using SelfieFriend.Models;
-using SelfieFriend.Services.Interface;
 
 namespace SelfieFriend.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class OfferingsController : ApiAuthorizationController
+    public class SaleOfferingController : ApiAuthorizationController
     {
-
         private readonly IOfferingService _offeringService;
         private readonly IFileService _fileService;
 
-        public OfferingsController(IOfferingService offeringService,IFileService fileService)
+        public SaleOfferingController(IOfferingService offeringService, IFileService fileService)
         {
             _offeringService = offeringService;
             _fileService = fileService;
@@ -27,7 +26,7 @@ namespace SelfieFriend.Controllers
         {
             string hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.Get(hostPort, UserId, OfferingType.Selfie);
+            return _offeringService.Get(hostPort, UserId, OfferingType.Sale);
         }
 
         /// <summary>
@@ -37,30 +36,30 @@ namespace SelfieFriend.Controllers
         /// <param name="count"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("api/GetOfferings")]
-        public IEnumerable<object> Get(int startPosition,int count)
+        [Route("api/GetSaleOfferings")]
+        public IEnumerable<object> Get(int startPosition, int count)
         {
             var hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.Get(hostPort, UserId, startPosition, count, OfferingType.Selfie);
+            return _offeringService.Get(hostPort, UserId, startPosition, count, OfferingType.Sale);
         }
 
 
         [HttpGet]
-        [Route("api/MyOfferings")]
+        [Route("api/MySaleOfferings")]
         public IEnumerable<object> GetMyOfferings()
         {
             string hostWithPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.GetUserOfferings(hostWithPort, UserId, OfferingType.Selfie);
+            return _offeringService.GetUserOfferings(hostWithPort, UserId, OfferingType.Sale);
         }
 
 
-       
+
 
 
         [HttpPost]
-        [Route("api/OfferChange")]
+        [Route("api/SaleOfferChange")]
         public HttpResponseMessage ChangeOffering([FromBody]PhotoModel model)
         {
 
@@ -82,7 +81,7 @@ namespace SelfieFriend.Controllers
         }
 
         [HttpPost]
-        [Route("api/UploadFileApi")]
+        [Route("api/SaleUploadFileApi")]
         public object UploadFile([FromBody]PhotoModel model)
         {
 
@@ -94,10 +93,10 @@ namespace SelfieFriend.Controllers
             var fileName = _fileService.ImageDecodeAndSave(model.Photo);
 
 
-            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,OfferingType.Selfie);
+            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,OfferingType.Sale);
 
-           var offer = _offeringService.GetOfferingByFilePath("Content/photos/" + fileName,
-                Request.RequestUri.Host + ":" + Request.RequestUri.Port);
+            var offer = _offeringService.GetOfferingByFilePath("Content/photos/" + fileName,
+                 Request.RequestUri.Host + ":" + Request.RequestUri.Port);
 
 
             var offerings = new List<object>();
@@ -108,10 +107,10 @@ namespace SelfieFriend.Controllers
 
 
         [HttpDelete]
-        [Route("api/CloseOffering")]
+        [Route("api/CloseSaleOffering")]
         public HttpResponseMessage Close(int offeringId)
         {
-            _offeringService.CloseOffering(UserId,offeringId);
+            _offeringService.CloseOffering(UserId, offeringId);
             return new HttpResponseMessage(HttpStatusCode.OK);
         }
 
