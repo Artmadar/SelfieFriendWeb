@@ -25,18 +25,18 @@ namespace SelfieFriend.Infrastructure.Business
         }
 
 
-        public List<OfferingPostModel> Get(string hostPort, int vkId)
+        public List<OfferingPostModel> Get(string hostPort, int vkId, OfferingType offeringType)
         {
-            var offerings = _offeringRepository.GetListWithUsersAndPhotos().Where(o=>o.User.VkId!=vkId).ToList();
+            var offerings = _offeringRepository.GetListWithUsersAndPhotos(offeringType).Where(o=>o.User.VkId!=vkId).ToList();
             var offeringModels = CreateOfferingPostModelsRevers(offerings, hostPort, vkId);
 
             return offeringModels;
         }
 
-        public List<OfferingPostModel> Get(string hostPort, int vkId, int startposition, int count)
+        public List<OfferingPostModel> Get(string hostPort, int vkId, int startposition, int count, OfferingType offeringType)
         {
 
-            var offerings = _offeringRepository.GetRangeList(startposition, count, vkId)
+            var offerings = _offeringRepository.GetRangeList(startposition, count, vkId,offeringType)
                 .Where(o => o.User.VkId != vkId).ToList();
             var offeringModels = CreateOfferingPostModels(offerings, hostPort, vkId);
 
@@ -46,9 +46,9 @@ namespace SelfieFriend.Infrastructure.Business
         }
 
 
-        public List<OfferingPostModel> GetUserOfferings(string hostPort, int vkId)
+        public List<OfferingPostModel> GetUserOfferings(string hostPort, int vkId, OfferingType offeringType)
         {
-            var offerings = _offeringRepository.GetListWithUsersAndPhotos().Where(o => o.User.VkId == vkId).ToList();
+            var offerings = _offeringRepository.GetListWithUsersAndPhotos(offeringType).Where(o => o.User.VkId == vkId).ToList();
             var offeringModels = CreateOfferingPostModelsRevers(offerings, hostPort, vkId);
 
             return offeringModels;

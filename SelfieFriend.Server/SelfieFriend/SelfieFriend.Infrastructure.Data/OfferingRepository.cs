@@ -17,18 +17,23 @@ namespace SelfieFriend.Infrastructure.Data
         }
 
 
-        public List<Offering> GetList()
+        public List<Offering> GetList(OfferingType offeringType)
         {
-            return _db.Offerings.Where(o => o.Closed == false).ToList();
+            var offeringTypeId = (int)offeringType;
+            return _db.Offerings.Where(o => o.Closed == false && o.OfferingTypeId == offeringTypeId).ToList();
         }
 
-        public List<Offering> GetRangeList(int startPosition, int count, int vkId)
+        //TODO: This crap should be rewrite!
+        public List<Offering> GetRangeList(int startPosition, int count, int vkId, OfferingType offeringType)
         {
+
+            var offeringTypeId = (int)offeringType;
+
             if (count <= 0)
                 throw new ArgumentException("param count can not be <= 0");
 
 
-            var offeringsCount = _db.Offerings.Count(o => o.Closed == false && o.User.VkId != vkId);
+            var offeringsCount = _db.Offerings.Count(o => o.Closed == false && o.User.VkId != vkId && o.OfferingTypeId == offeringTypeId);
 
             if (offeringsCount < startPosition + count)
             {
@@ -40,7 +45,7 @@ namespace SelfieFriend.Infrastructure.Data
                     return _db.Offerings
                         .Include(o => o.User)
                         .Include(o => o.OfferingPhoto)
-                        .Where(o => o.Closed == false && o.User.VkId != vkId)
+                        .Where(o => o.Closed == false && o.User.VkId != vkId && o.OfferingTypeId == offeringTypeId)
                         .OrderByDescending(o => o.Id).Skip(startPosition).Take(offeringsCount - startPosition - 1)
                         .ToList();
                 }
@@ -65,7 +70,7 @@ namespace SelfieFriend.Infrastructure.Data
                 return _db.Offerings
                     .Include(o => o.User)
                     .Include(o => o.OfferingPhoto)
-                    .Where(o => o.Closed == false && o.User.VkId != vkId)
+                    .Where(o => o.Closed == false && o.User.VkId != vkId && o.OfferingTypeId == offeringTypeId)
                     .OrderByDescending(o=>o.Id).Skip(startPosition).Take(offeringsCount-startPosition)
                     .ToList();
 
@@ -77,7 +82,7 @@ namespace SelfieFriend.Infrastructure.Data
             return _db.Offerings
                 .Include(o => o.User)
                 .Include(o => o.OfferingPhoto)
-                .Where(o => o.Closed == false && o.User.VkId != vkId)
+                .Where(o => o.Closed == false && o.User.VkId != vkId && o.OfferingTypeId == offeringTypeId)
                 .OrderByDescending(o => o.Id).Skip(startPosition).Take(count)
                 .ToList();
 
@@ -88,21 +93,25 @@ namespace SelfieFriend.Infrastructure.Data
             
         }
 
-        public List<Offering> GetListWithUsersAndPhotos()
+        public List<Offering> GetListWithUsersAndPhotos(OfferingType offeringType)
         {
+            var offeringTypeId = (int)offeringType;
+
             return _db.Offerings
                 .Include(o => o.User)
                 .Include(o => o.OfferingPhoto)
-                .Where(i => i.Closed == false)
+                .Where(i => i.Closed == false && i.OfferingTypeId == offeringTypeId)
                 .ToList();
         }
 
-        public List<Offering> GetListWithUsersAndPhotosByUserVkId(int vkid)
+        public List<Offering> GetListWithUsersAndPhotosByUserVkId(int vkid, OfferingType offeringType)
         {
+
+            var offeringTypeId = (int)offeringType; 
             return _db.Offerings
                 .Include(o => o.User)
                 .Include(o => o.OfferingPhoto)
-                .Where(o => o.User.VkId == vkid && o.Closed == false)
+                .Where(o => o.User.VkId == vkid && o.Closed == false && o.OfferingTypeId == offeringTypeId)
                 .ToList();
         }
 

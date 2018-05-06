@@ -69,6 +69,10 @@
     <Compile Include="Migrations\201707190656360_AddMessageEntity.Designer.cs">
       <DependentUpon>201707190656360_AddMessageEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805060914466_AddOfferingsCategory.cs" />
+    <Compile Include="Migrations\201805060914466_AddOfferingsCategory.Designer.cs">
+      <DependentUpon>201805060914466_AddOfferingsCategory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OfferingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,6 +110,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707190656360_AddMessageEntity.resx">
       <DependentUpon>201707190656360_AddMessageEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805060914466_AddOfferingsCategory.resx">
+      <DependentUpon>201805060914466_AddOfferingsCategory.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

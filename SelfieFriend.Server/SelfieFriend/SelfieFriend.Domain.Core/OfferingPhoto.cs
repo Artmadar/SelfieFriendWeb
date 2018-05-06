@@ -20,8 +20,5 @@ namespace SelfieFriend.Domain.Core
         public double? Latitude { get; set; }
 
         public double? Logitude { get; set; }
-
-       
-
     }
 }

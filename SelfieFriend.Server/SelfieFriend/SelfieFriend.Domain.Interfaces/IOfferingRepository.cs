@@ -5,10 +5,10 @@ namespace SelfieFriend.Domain.Interfaces
 {
     public interface IOfferingRepository
     {
-        List<Offering> GetList();
-        List<Offering> GetRangeList(int startPosition,int count,int vkId);
-        List<Offering> GetListWithUsersAndPhotos();
-        List<Offering> GetListWithUsersAndPhotosByUserVkId(int vkid);
+        List<Offering> GetList(OfferingType offeringType);
+        List<Offering> GetRangeList(int startPosition,int count,int vkId, OfferingType offeringType);
+        List<Offering> GetListWithUsersAndPhotos(OfferingType offeringType);
+        List<Offering> GetListWithUsersAndPhotosByUserVkId(int vkid, OfferingType offeringType);
         Offering Get(int id);
         Offering GetByPhotoPath(string path);
         void Create(Offering item);

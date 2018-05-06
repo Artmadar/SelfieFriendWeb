@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using SelfieFriend.Domain.Core;
 using SelfieFriend.Models;
 using SelfieFriend.Services.Interface;
 
@@ -26,7 +27,7 @@ namespace SelfieFriend.Controllers
         {
             string hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.Get(hostPort, UserId);
+            return _offeringService.Get(hostPort, UserId, OfferingType.Selfie);
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace SelfieFriend.Controllers
         {
             var hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.Get(hostPort, UserId, startPosition, count);
+            return _offeringService.Get(hostPort, UserId, startPosition, count, OfferingType.Selfie);
         }
 
 
@@ -51,7 +52,7 @@ namespace SelfieFriend.Controllers
         {
             string hostWithPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.GetUserOfferings(hostWithPort, UserId);
+            return _offeringService.GetUserOfferings(hostWithPort, UserId, OfferingType.Selfie);
         }
 
 
