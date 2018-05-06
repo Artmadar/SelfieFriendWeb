@@ -81,6 +81,10 @@
     <Compile Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.Designer.cs">
       <DependentUpon>201805061027595_OfferingToOfferingCategoryRelations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805061137246_AddPurchasedSubscribe.cs" />
+    <Compile Include="Migrations\201805061137246_AddPurchasedSubscribe.Designer.cs">
+      <DependentUpon>201805061137246_AddPurchasedSubscribe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OfferingRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,6 +131,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.resx">
       <DependentUpon>201805061027595_OfferingToOfferingCategoryRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805061137246_AddPurchasedSubscribe.resx">
+      <DependentUpon>201805061137246_AddPurchasedSubscribe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

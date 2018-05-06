@@ -38,10 +38,13 @@ namespace SelfieFriend.Domain.Core
 
         public IEnumerable<Inquiry> Inquiries { get; set; }
 
+        public IEnumerable<PurchasedSubscribe> PurchasedSubscribes { get; set; }
+
         public User()
         {
-            Offerings=new List<Offering>();
-            Inquiries=new List<Inquiry>();
+            Offerings = new List<Offering>();
+            Inquiries = new List<Inquiry>();
+            PurchasedSubscribes = new List<PurchasedSubscribe>();
         }
     }
 }

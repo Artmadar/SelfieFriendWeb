@@ -49,6 +49,7 @@
     <Compile Include="OfferingPhoto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.cs" />
+    <Compile Include="PurchasedSubscribe.cs" />
     <Compile Include="PurchasePhoto.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
