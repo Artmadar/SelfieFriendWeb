@@ -7,12 +7,12 @@ namespace SelfieFriend.Domain.Interfaces
     /// Базовый интерфейс репозиториев, содержащий CRUD-операции
     /// </summary>
     /// <typeparam name="T">BaseSelfieFriendEntity</typeparam>
-    public interface IRepository<out T> where T : BaseSelfieFriendEntity
+    public interface IRepository<T> where T : BaseSelfieFriendEntity
     {
         T Get(int id);
         IEnumerable<T> GetList();
-        void Create(object obj);
+        void Create(T obj);
         void Delete(int id);
-        void Update(object obj);
+        void Update(T obj);
     }
 }

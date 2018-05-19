@@ -1,36 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using SelfieFriend.Domain.Core;
 using SelfieFriend.Domain.Interfaces;
 
 namespace SelfieFriend.Infrastructure.Data
 {
-    //
-    public class Repository : IRepository<BaseSelfieFriendEntity>
+   
+    public class Repository<TBaseSelfieFriendEntity> : IRepository<TBaseSelfieFriendEntity>  where TBaseSelfieFriendEntity: BaseSelfieFriendEntity
     {
-        public BaseSelfieFriendEntity Get(int id)
+        protected readonly SelfieFriendContext _db;
+
+        public Repository(SelfieFriendContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
         }
 
-        public IEnumerable<BaseSelfieFriendEntity> GetList()
+        public TBaseSelfieFriendEntity Get(int id)
         {
-            throw new NotImplementedException();
+            return _db.Set<TBaseSelfieFriendEntity>().Find(id);
         }
 
-        public void Create(object obj)
+        public IEnumerable<TBaseSelfieFriendEntity> GetList()
         {
-            throw new NotImplementedException();
+            return _db.Set<TBaseSelfieFriendEntity>();
+        }
+
+        public void Create(TBaseSelfieFriendEntity obj)
+        {
+            _db.Set<TBaseSelfieFriendEntity>().Add(obj);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var obj = _db.Set<TBaseSelfieFriendEntity>().Find(id);
+            _db.Set<TBaseSelfieFriendEntity>().Remove(obj);
+            _db.SaveChanges();
         }
 
-        public void Update(object obj)
+        public void Update(TBaseSelfieFriendEntity obj)
         {
-            throw new NotImplementedException();
+            _db.Entry(obj).State = System.Data.Entity.EntityState.Modified;
+            _db.SaveChanges();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using SelfieFriend.Domain.Core;
 using SelfieFriend.Domain.Interfaces;
 using SelfieFriend.Services.Interface;
+using SelfieFriend.Services.Interface.Models;
 
 namespace SelfieFriend.Infrastructure.Business
 {
@@ -23,5 +24,19 @@ namespace SelfieFriend.Infrastructure.Business
         {
             return _userRepository.GetByVkId(id);
         }
+
+        public void ChangeUserInfo(UserInfoModel userInfoModel, int vkId)
+        {
+            var user = _userRepository.GetByVkId(vkId);
+
+            user.Email = userInfoModel.Email;
+            user.Phone = userInfoModel.Phone;
+            user.FirstName = userInfoModel.FirstName;
+            user.LastName = userInfoModel.LastName;
+            user.AboutHim = userInfoModel.AboutHim;
+
+            _userRepository.Update(user);
+        }
+
     }
 }

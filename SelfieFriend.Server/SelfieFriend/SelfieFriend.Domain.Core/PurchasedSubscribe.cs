@@ -1,5 +1,4 @@
 ﻿using System;
-
 namespace SelfieFriend.Domain.Core
 {
     public class PurchasedSubscribe:BaseSelfieFriendEntity
@@ -11,5 +10,7 @@ namespace SelfieFriend.Domain.Core
         public DateTime StartDate { get; set; }
 
         public DateTime EndDate { get; set; }
+
+        public int PhotoToBuyCount { get; set; }
     }
 }

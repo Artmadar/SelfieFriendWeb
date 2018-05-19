@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Web.Http.Cors;
 using SelfieFriend.Services.Interface;
-
+using SelfieFriend.Services.Interface.Models;
 
 namespace SelfieFriend.Controllers
 {
@@ -22,9 +22,10 @@ namespace SelfieFriend.Controllers
             return _userServise.GetUserByVkId(UserId);   
         }
 
-        public HttpResponseMessage ChangeData()
+        [HttpPost]
+        public HttpResponseMessage ChangeInfo([FromBody]UserInfoModel userInfoModel)
         {
-
+            _userServise.ChangeUserInfo(userInfoModel, UserId);
             return new HttpResponseMessage(System.Net.HttpStatusCode.OK);
         }
 

@@ -23,6 +23,26 @@ namespace SelfieFriend.Infrastructure.Data
             return _db.Offerings.Include(o => o.OfferingCategory).Where(o => o.Closed == false && o.OfferingTypeId == offeringTypeId).ToList();
         }
 
+        public List<Offering> GetListWithSerach(OfferingType offeringType,string search,int CategoryId = 0)
+        {
+            var comp = StringComparison.OrdinalIgnoreCase;
+            var searchStr = search.Trim().ToLower();
+            var offeringTypeId = (int)offeringType;
+            return _db.Offerings.Include(o => o.OfferingCategory)
+                .Include(o => o.User)
+                .Include(o => o.OfferingPhoto)
+                .Include(o => o.OfferingCategory)
+                .Where(
+                o =>
+            (o.Closed == false && o.OfferingTypeId == offeringTypeId)
+            && (CategoryId == 0 || o.OfferingCategoryId == CategoryId)
+            && (searchStr == null || searchStr=="" || o.Title.ToLower().Contains(searchStr))
+            )
+            .ToList();
+        }
+
+
+
         //TODO: This crap should be rewrite!
         public List<Offering> GetRangeList(int startPosition, int count, int vkId, OfferingType offeringType)
         {
@@ -152,5 +172,9 @@ namespace SelfieFriend.Infrastructure.Data
             _db.Offerings.Remove(offerings);
             _db.SaveChanges();
         }
+
+
+        
+
     }
 }

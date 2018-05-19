@@ -71,12 +71,12 @@ namespace SelfieFriend.Controllers
 
             if (string.IsNullOrEmpty(model.Photo))
             {
-                _offeringService.OfferChange(model.Id, UserId, model.Cost, model.Description, model.Title);
+                _offeringService.OfferChange(model.Id, UserId, model.Cost, model.Description, model.Title, model.CategoryId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
 
             var fileName = _fileService.ImageDecodeAndSave(model.Photo);
-            _offeringService.OfferChange(model.Id, "Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title);
+            _offeringService.OfferChange(model.Id, "Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,model.CategoryId);
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
@@ -94,7 +94,7 @@ namespace SelfieFriend.Controllers
             var fileName = _fileService.ImageDecodeAndSave(model.Photo);
 
 
-            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,OfferingType.Selfie);
+            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title, model.CategoryId, OfferingType.Selfie);
 
            var offer = _offeringService.GetOfferingByFilePath("Content/photos/" + fileName,
                 Request.RequestUri.Host + ":" + Request.RequestUri.Port);

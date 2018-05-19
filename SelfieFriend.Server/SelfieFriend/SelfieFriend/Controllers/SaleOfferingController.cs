@@ -22,6 +22,16 @@ namespace SelfieFriend.Controllers
         }
 
 
+        [HttpGet]
+        [Route("SaleOffering/GetWithSerach")]
+        public IEnumerable<object> GetWithSerach(string search,int categoryId = 0)
+        {
+            string hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
+            return _offeringService.GetWithSerach(OfferingType.Sale, UserId,hostPort, search, categoryId);
+        }
+
+        [HttpGet]
+        [Route("SaleOffering/Get")]
         public IEnumerable<object> Get()
         {
             string hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
@@ -70,12 +80,12 @@ namespace SelfieFriend.Controllers
 
             if (string.IsNullOrEmpty(model.Photo))
             {
-                _offeringService.OfferChange(model.Id, UserId, model.Cost, model.Description, model.Title);
+                _offeringService.OfferChange(model.Id, UserId, model.Cost, model.Description, model.Title, model.CategoryId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
 
             var fileName = _fileService.ImageDecodeAndSave(model.Photo);
-            _offeringService.OfferChange(model.Id, "Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title);
+            _offeringService.OfferChange(model.Id, "Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title, model.CategoryId);
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
@@ -93,7 +103,7 @@ namespace SelfieFriend.Controllers
             var fileName = _fileService.ImageDecodeAndSave(model.Photo);
 
 
-            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,OfferingType.Sale);
+            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,model.CategoryId, OfferingType.Sale);
 
             var offer = _offeringService.GetOfferingByFilePath("Content/photos/" + fileName,
                  Request.RequestUri.Host + ":" + Request.RequestUri.Port);

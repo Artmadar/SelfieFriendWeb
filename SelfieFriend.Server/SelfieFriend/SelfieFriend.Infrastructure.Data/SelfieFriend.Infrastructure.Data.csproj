@@ -85,12 +85,27 @@
     <Compile Include="Migrations\201805061137246_AddPurchasedSubscribe.Designer.cs">
       <DependentUpon>201805061137246_AddPurchasedSubscribe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805091355269_AddSubscribes.cs" />
+    <Compile Include="Migrations\201805091355269_AddSubscribes.Designer.cs">
+      <DependentUpon>201805091355269_AddSubscribes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091409119_FillPlans.cs" />
+    <Compile Include="Migrations\201805091409119_FillPlans.Designer.cs">
+      <DependentUpon>201805091409119_FillPlans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805171208073_AddNewFieldToSubscribes.cs" />
+    <Compile Include="Migrations\201805171208073_AddNewFieldToSubscribes.Designer.cs">
+      <DependentUpon>201805171208073_AddNewFieldToSubscribes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OfferingRepository.cs" />
+    <Compile Include="OfferingsCategoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchasedSubscribeRepository.cs" />
     <Compile Include="PurchaseRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="SelfieFriendContext.cs" />
+    <Compile Include="SubscribePlanRepository.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +149,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805061137246_AddPurchasedSubscribe.resx">
       <DependentUpon>201805061137246_AddPurchasedSubscribe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091355269_AddSubscribes.resx">
+      <DependentUpon>201805091355269_AddSubscribes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091409119_FillPlans.resx">
+      <DependentUpon>201805091409119_FillPlans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805171208073_AddNewFieldToSubscribes.resx">
+      <DependentUpon>201805171208073_AddNewFieldToSubscribes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
