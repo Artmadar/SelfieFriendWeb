@@ -21,22 +21,28 @@ namespace SelfieFriend.Infrastructure.Business
 
 
 
-
-        public void test()
+        public Tuple<string,string> ImageDecodeAndSaveWithWaterMark(string base64string)
         {
-            var filePath = HttpContext.Current.Server.MapPath("~/Content/photos/moby.jpg");
-            var image = new Bitmap(filePath);
-            var watermarkPath = HttpContext.Current.Server.MapPath("~/Content/photos/co.png");
-            var watermark = new Bitmap(watermarkPath);
+            var savedImageFileName = ImageDecodeAndSave(base64string);
 
-            DrawWatermark(image, watermark, WatermarkPosition.Middle, Color.Cyan, 0.4f);
+            var savedImageFilePath = HttpContext.Current.Server.MapPath($"~/Content/photos/{savedImageFileName}");
+
+            var savedImageFilePathBitmap = new Bitmap(savedImageFilePath);
+            var watermarkPath = HttpContext.Current.Server.MapPath("~/Content/photos/co1.png");
+            var watermarkBitmap = new Bitmap(watermarkPath);
+
+            
+
+            var imageWithWaterMarkName = DrawWatermark(savedImageFilePathBitmap, watermarkBitmap, WatermarkPosition.Middle, Color.Gray, 0.4f);
 
 
+            return new Tuple<string, string>(savedImageFileName, imageWithWaterMarkName);
 
         }
 
 
-        public void DrawWatermark(Image original, Bitmap watermark,
+
+        private string DrawWatermark(Image original, Bitmap watermark,
     WatermarkPosition position, Color transparentColor, float opacity)
         {
             if (original == null)
@@ -67,9 +73,11 @@ namespace SelfieFriend.Infrastructure.Business
 
                 var bytes = ImageToByte2(original);
 
-                var filePath = HttpContext.Current.Server.MapPath("~/Content/photos/ppp.jpg");
-                File.WriteAllBytes(filePath, bytes);
 
+                var imageWithWaterMarkName = Guid.NewGuid() + ".jpg";
+                var filePath = HttpContext.Current.Server.MapPath($"~/Content/photos/{imageWithWaterMarkName}");
+                File.WriteAllBytes(filePath, bytes);
+                return imageWithWaterMarkName;
             }
         }
 
@@ -110,7 +118,7 @@ namespace SelfieFriend.Infrastructure.Business
     }
 
 
-    public enum WatermarkPosition
+    internal enum WatermarkPosition
     {
         TopLeft = 0,
         TopRight,

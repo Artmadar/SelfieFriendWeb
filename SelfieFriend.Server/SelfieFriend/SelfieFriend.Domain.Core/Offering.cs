@@ -32,9 +32,13 @@ namespace SelfieFriend.Domain.Core
 
         public bool Closed { get; set; }
 
+        public IEnumerable<UserBuyOffering> UserBuyOfferings { get; set; }
+
+
         public Offering()
         {
             Inquiries=new List<Inquiry>();
+            UserBuyOfferings = new List<UserBuyOffering>();
         }
     }
 

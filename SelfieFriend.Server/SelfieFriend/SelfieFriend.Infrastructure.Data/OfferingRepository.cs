@@ -25,7 +25,7 @@ namespace SelfieFriend.Infrastructure.Data
 
         public List<Offering> GetListWithSerach(OfferingType offeringType,string search,int CategoryId = 0)
         {
-            var comp = StringComparison.OrdinalIgnoreCase;
+          
             var searchStr = search.Trim().ToLower();
             var offeringTypeId = (int)offeringType;
             return _db.Offerings.Include(o => o.OfferingCategory)

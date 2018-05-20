@@ -14,6 +14,7 @@ namespace SelfieFriend.Services.Interface
         void OfferChange(int offeringId,string filePath,int vkId, decimal price,string description, string title, int categoryId);
         void OfferChange(int offeringId, int vkId, decimal price, string description, string title, int categoryId);
         void Create(string filePath, int vkId, decimal price, string description, string title, int categoryId, OfferingType offeringType);
+        void Create(string originalFilePath, string wmFilePath, int vkId, decimal price, string description, string title, int categoryId, OfferingType offeringType);
         void CloseOffering(int vkId, int offeringId);
 
         List<OfferingPostModel> GetWithSerach(OfferingType offeringType, int vkId, string hostPort, string search, int CategoryId = 0);

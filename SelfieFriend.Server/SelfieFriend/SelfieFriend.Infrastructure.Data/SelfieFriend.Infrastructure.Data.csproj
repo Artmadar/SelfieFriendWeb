@@ -97,6 +97,14 @@
     <Compile Include="Migrations\201805171208073_AddNewFieldToSubscribes.Designer.cs">
       <DependentUpon>201805171208073_AddNewFieldToSubscribes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805191636337_AddImageWithWaterMarkPath.cs" />
+    <Compile Include="Migrations\201805191636337_AddImageWithWaterMarkPath.Designer.cs">
+      <DependentUpon>201805191636337_AddImageWithWaterMarkPath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805200427483_AddBuyEntity.cs" />
+    <Compile Include="Migrations\201805200427483_AddBuyEntity.Designer.cs">
+      <DependentUpon>201805200427483_AddBuyEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OfferingRepository.cs" />
     <Compile Include="OfferingsCategoryRepository.cs" />
@@ -106,6 +114,7 @@
     <Compile Include="Repository.cs" />
     <Compile Include="SelfieFriendContext.cs" />
     <Compile Include="SubscribePlanRepository.cs" />
+    <Compile Include="UserBuyOfferingReporsitory.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805171208073_AddNewFieldToSubscribes.resx">
       <DependentUpon>201805171208073_AddNewFieldToSubscribes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805191636337_AddImageWithWaterMarkPath.resx">
+      <DependentUpon>201805191636337_AddImageWithWaterMarkPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805200427483_AddBuyEntity.resx">
+      <DependentUpon>201805200427483_AddBuyEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

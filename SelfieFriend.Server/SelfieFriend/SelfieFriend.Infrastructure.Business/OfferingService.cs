@@ -152,6 +152,32 @@ namespace SelfieFriend.Infrastructure.Business
 
         }
 
+
+        public void Create(string originalFilePath,string wmFilePath, int vkId, decimal price, string description, string title, int categoryId, OfferingType offeringType)
+        {
+            var offeringTypeId = (int)offeringType;
+            var offering = new Offering();
+            var photo = new OfferingPhoto();
+
+            photo.ImagePath = originalFilePath;
+            photo.ImageWithWaterMarkPath = wmFilePath;
+            offering.UserId = _userService.GetUserByVkId(vkId).Id;
+            offering.OfferingPhoto = photo;
+            offering.Price = price;
+            offering.Desctiption = description;
+            offering.Title = title;
+            offering.DateCreated = DateTime.UtcNow;
+            offering.OfferingTypeId = offeringTypeId;
+            if (categoryId != 0)
+            {
+                offering.OfferingCategoryId = categoryId;
+            }
+
+            _offeringRepository.Create(offering);
+
+        }
+
+
         public void CloseOffering(int vkId, int offeringId)
         {
             var user = _userService.GetUserByVkId(vkId);
@@ -182,12 +208,14 @@ namespace SelfieFriend.Infrastructure.Business
 
 
 
+                var imagePath = offering.OfferingPhoto.ImageWithWaterMarkPath == null ? Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath) : Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImageWithWaterMarkPath);
+
                 offeringModels.Add(item: new OfferingPostModel()
                 {
                     OfferingId = offering.Id,
                     FirstName = offering.User.FirstName,
                     LastName = offering.User.LastName,
-                    ImagePath = Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath),
+                    ImagePath = imagePath,
                     Title = offering.Title,
                     Price = offering.Price.ToString(CultureInfo.InvariantCulture),
                     DateCreated = offering.DateCreated,
@@ -224,7 +252,7 @@ namespace SelfieFriend.Infrastructure.Business
                 offeringPostModel.LastName = offering.User.LastName;
      
 
-                offeringPostModel.ImagePath = Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath);
+                offeringPostModel.ImagePath  = offering.OfferingPhoto.ImageWithWaterMarkPath == null ? Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath) : Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImageWithWaterMarkPath);
                 offeringPostModel.Title = offering.Title;
                 offeringPostModel.Price = offering.Price.ToString(CultureInfo.InvariantCulture);
                 offeringPostModel.DateCreated = offering.DateCreated;

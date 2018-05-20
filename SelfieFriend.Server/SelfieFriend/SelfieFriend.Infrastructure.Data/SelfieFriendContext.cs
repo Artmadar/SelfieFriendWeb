@@ -29,5 +29,7 @@ namespace SelfieFriend.Infrastructure.Data
 
         public DbSet<SubscribePlan> SubscribePlans { get; set; }
 
+        public DbSet<UserBuyOffering> UserBuyOfferings { get; set; }
+
     }
 }

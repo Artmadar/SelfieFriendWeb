@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
+
 namespace SelfieFriend.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
@@ -38,6 +39,7 @@ namespace SelfieFriend.Controllers
 
             return _offeringService.Get(hostPort, UserId, OfferingType.Sale);
         }
+
 
         /// <summary>
         /// Получение предложений других пользователей
@@ -100,12 +102,12 @@ namespace SelfieFriend.Controllers
                 return Request.CreateResponse(HttpStatusCode.BadRequest);
             }
 
-            var fileName = _fileService.ImageDecodeAndSave(model.Photo);
+             var names  = _fileService.ImageDecodeAndSaveWithWaterMark(model.Photo);
 
 
-            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,model.CategoryId, OfferingType.Sale);
+            _offeringService.Create("Content/photos/" + names.Item1, "Content/photos/" + names.Item2 , UserId, model.Cost, model.Description, model.Title,model.CategoryId, OfferingType.Sale);
 
-            var offer = _offeringService.GetOfferingByFilePath("Content/photos/" + fileName,
+            var offer = _offeringService.GetOfferingByFilePath("Content/photos/" + names.Item1,
                  Request.RequestUri.Host + ":" + Request.RequestUri.Port);
 
 

@@ -36,6 +36,8 @@ namespace SelfieFriend.Domain.Core
 
         public IEnumerable<Offering> Offerings { get; set; }
 
+        public IEnumerable<UserBuyOffering> UserBuyOfferings { get; set; }
+
         public IEnumerable<Inquiry> Inquiries { get; set; }
 
         public IEnumerable<PurchasedSubscribe> PurchasedSubscribes { get; set; }
@@ -45,6 +47,7 @@ namespace SelfieFriend.Domain.Core
             Offerings = new List<Offering>();
             Inquiries = new List<Inquiry>();
             PurchasedSubscribes = new List<PurchasedSubscribe>();
+            UserBuyOfferings = new List<UserBuyOffering>();
         }
     }
 }

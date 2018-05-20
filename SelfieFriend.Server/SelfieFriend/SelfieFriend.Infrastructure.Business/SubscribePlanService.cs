@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace SelfieFriend.Infrastructure.Business
 {
+    
     public class SubscribeService
     {
         private readonly SubscribePlanRepository _subscribePlanRepository;
@@ -88,8 +89,22 @@ namespace SelfieFriend.Infrastructure.Business
             if (userPurchasedSubscribe == null)
                 return false;
 
-            if (userPurchasedSubscribe.EndDate < DateTime.UtcNow)
+            if (userPurchasedSubscribe.EndDate < DateTime.UtcNow|| userPurchasedSubscribe.PhotoToBuyCount<=0)
                 return false;
+
+            return true;
+        }
+
+
+        public bool ChangeSubscribeInfoWhenMakePurchase(int vkId)
+        {
+            if (!CheckSubscribe(vkId))
+                return false;
+
+            var subscribe = GetUserPlan(vkId);
+            subscribe.PhotoToBuyCount--;
+
+            _purchasedSubscribeRepository.Update(subscribe);
 
             return true;
         }

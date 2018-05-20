@@ -82,11 +82,13 @@ namespace SelfieFriend.App_Start
 
             kernel.Bind<OfferingsCategoryRepository>().ToSelf();
             kernel.Bind<SubscribePlanRepository>().ToSelf();
-
+            kernel.Bind<UserBuyOfferingReporsitory>().ToSelf();
 
 
             kernel.Bind<OfferingsCategoryService>().ToSelf();
             kernel.Bind<SubscribeService>().ToSelf();
+            kernel.Bind<UserBuyOfferingService>().ToSelf();
+
 
             kernel.Bind<IMessageService>().To<MessageService>();
             kernel.Bind<IFileService>().To<FileService>();
