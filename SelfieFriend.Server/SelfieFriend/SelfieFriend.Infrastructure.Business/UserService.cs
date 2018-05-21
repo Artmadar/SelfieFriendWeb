@@ -34,6 +34,7 @@ namespace SelfieFriend.Infrastructure.Business
             user.FirstName = userInfoModel.FirstName;
             user.LastName = userInfoModel.LastName;
             user.AboutHim = userInfoModel.AboutHim;
+            user.Site = userInfoModel.Site;
 
             _userRepository.Update(user);
         }

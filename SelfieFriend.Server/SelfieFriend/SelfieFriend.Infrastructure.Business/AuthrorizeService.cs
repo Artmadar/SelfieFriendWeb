@@ -25,9 +25,16 @@ namespace SelfieFriend.Infrastructure.Business
         {
             var client = new HttpClient();
 
+            //var response =
+            //    await client.GetAsync(
+            //            $"https://api.vk.com/method/users.get?access_token={accessToken}&version=5.74&fields=photo_100&name_case=Nom");
+
             var response =
                 await client.GetAsync(
-                        $"https://api.vk.com/method/users.get?access_token={accessToken}&version=5.74&fields=photo_100&name_case=Nom");
+                        $"https://api.vk.com/method/users.get?access_token={accessToken}&version=5.74&fields=photo_400_orig&name_case=Nom");
+
+
+
             var responseString = await response.Content.ReadAsStringAsync();
             var profileInfo = JsonConvert.DeserializeAnonymousType(responseString, new UserPostModel());
 
@@ -55,7 +62,7 @@ namespace SelfieFriend.Infrastructure.Business
             }
             else
             {
-                user.AvatarPath = profileInfo.response.First().photo_100;
+                user.AvatarPath = profileInfo.response.First().photo_400_orig;
                 _userRepository.Update(user);
             }
 

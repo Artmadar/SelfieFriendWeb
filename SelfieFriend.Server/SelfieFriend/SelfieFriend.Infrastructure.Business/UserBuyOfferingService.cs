@@ -1,10 +1,11 @@
 ﻿using SelfieFriend.Domain.Core;
 using SelfieFriend.Infrastructure.Data;
-using System;
+using SelfieFriend.Services.Interface.Models;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SelfieFriend.Infrastructure.Business
 {
@@ -44,14 +45,46 @@ namespace SelfieFriend.Infrastructure.Business
             return false;
         }
 
-
-        public List<UserBuyOffering> GetUserBuyOfferingHistory(int vkId)
+        public List<OfferingPostModel> GetUserBuyOfferingHistory(int vkId,string hostPort)
         {
             var user = _userService.GetUserByVkId(vkId);
             var userId = user.Id;
-            var userBuyOfferings =_userBuyOfferingReporsitory.GetListByUserId(userId);
+            var userBuyOfferings =_userBuyOfferingReporsitory.GetListByUserId(userId).Select(x=>x.Offering).ToList();
 
-            return userBuyOfferings;
+            return CreateOfferingPostModels(userBuyOfferings,hostPort,true);
+        }
+
+        private List<OfferingPostModel> CreateOfferingPostModels(List<Offering> offerings,string hostPort, bool isOriginal=false)
+        {
+            var offeringModels = new List<OfferingPostModel>();
+
+            foreach (var offering in offerings)
+            {
+                string path = offering.User.AvatarPath;
+                if (string.IsNullOrEmpty(path))
+                {
+                    path = Path.Combine("http://", hostPort + @"/" + "Content/Avatars/size50/camera_50.png");
+                }
+
+
+
+                var offeringPostModel = new OfferingPostModel();
+                offeringPostModel.OfferingId = offering.Id;
+                offeringPostModel.FirstName = offering.User.FirstName;
+                offeringPostModel.LastName = offering.User.LastName;
+
+
+                offeringPostModel.ImagePath = isOriginal ? Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath) : Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImageWithWaterMarkPath);
+                offeringPostModel.Title = offering.Title;
+                offeringPostModel.Price = offering.Price.ToString(CultureInfo.InvariantCulture);
+                offeringPostModel.DateCreated = offering.DateCreated;
+                offeringPostModel.AvatarPath = path;
+                offeringPostModel.Description = offering.Desctiption;
+                offeringPostModel.CategotyName = offering.OfferingCategory != null ? offering.OfferingCategory.Name : "NoCategory";
+
+                offeringModels.Add(offeringPostModel);
+            }
+            return offeringModels;
         }
 
 

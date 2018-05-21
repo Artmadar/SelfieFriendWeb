@@ -17,6 +17,7 @@ namespace SelfieFriend.Services.Interface.Models
         public string first_name { get; set; }
         public string last_name { get; set; }
         public string photo_100 { get; set; }
+        public string photo_400_orig { get; set; }
 
 
     }

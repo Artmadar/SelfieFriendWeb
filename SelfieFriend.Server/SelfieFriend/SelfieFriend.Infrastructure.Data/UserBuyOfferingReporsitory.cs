@@ -1,5 +1,6 @@
 ﻿using SelfieFriend.Domain.Core;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 
 namespace SelfieFriend.Infrastructure.Data
@@ -18,7 +19,9 @@ namespace SelfieFriend.Infrastructure.Data
 
         public List<UserBuyOffering> GetListByUserId(int userId)
         {
-            var query = _db.UserBuyOfferings.Where(x => x.UserId == userId).ToList();
+            var query = _db.UserBuyOfferings.Where(x => x.UserId == userId)
+                .Include(x=>x.Offering)
+                .ToList();
             return query;
         }
 
