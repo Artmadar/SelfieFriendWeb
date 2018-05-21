@@ -1,0 +1,106 @@
+<div>
+        <div style="    background-image: url(http://www2.shutterstock.com/base/public/static/coreproduct-bg-large-min-4333b129f74504dd5082abb4397de605.jpg);
+padding: 50px 24px; justify-content: center; width: 100%">
+                <div style="max-width: 1600px;display: flex;flex-direction: row;align-items: flex-start;flex-wrap: wrap;margin: 0 auto;justify-content: center;">
+                        <div style="color: #fff;
+font-family: FrankRegular,Arial,Helvetica,sans-serif;">
+                                <div style="    font-size: 3.6rem;
+line-height: 4.8rem;"> Наши планы для всех пользователей и проектов!</div>
+                                <div style="    font-size: 2rem;
+line-height: 2.4rem;">
+                                        Получите изображения, которые вам нравятся, с правами на использование, которые вам нужны.
+                                </div>
+                        </div>
+                </div>
+        </div>
+</div>
+<md-card animateIn>
+        <h3 style="margin-bottom: 16px;
+        font-size: 20px;
+        margin-top: 10px;
+        font-weight: 500;
+        line-height: 1.25;
+        color: inherit;
+        font-family: Frank,Arial,Helvetica,sans-serif;
+        text-align: center;">Тарифные планы</h3>
+        <div *ngFor="let plan of plans" class="tarif" style="display: inline-block;
+        margin-left: 183px;">
+                <div class="tarif-info" style="position: relative;
+        text-align: center;
+        border: 2px solid #e1e1e1;
+        border-bottom: 0;">
+                        <div *ngIf="plan.MonthCount === 1 " class="pt-10" style="margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 0;
+        outline: 0;
+        font-weight: inherit;
+        vertical-align: baseline;
+        background: 0;">
+                                {{plan.MonthCount}} месяц бесплатно
+                        </div>
+                        <div *ngIf="plan.MonthCount === 3 " class="pt-10" style="margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 0;
+        outline: 0;
+        font-weight: inherit;
+        vertical-align: baseline;
+        background: 0;">
+                                {{plan.MonthCount}} месяца бесплатно
+                        </div>
+                        <div *ngIf="plan.MonthCount === 12" class="pt-10" style="margin-top: 10px;
+        margin-left: 10px;
+        margin-right: 10px;
+        border: 0;
+        outline: 0;
+        font-weight: inherit;
+        vertical-align: baseline;
+        background: 0;">
+                                {{plan.MonthCount}} месяцев бесплатно
+                        </div>
+                        <div class="price" style="    padding: 0 0 10px 0;
+        line-height: 14px; position: relative;
+        clear: both;text-align: center;
+        font-size: 30px;margin-top: inherit;
+        font-family: inherit;
+        white-space: inherit;
+        font-weight: normal;">
+                                <b style="font-size: 14px;
+            line-height: 14px;">
+                                        <span style="font-size: 14px;">{{plan.Price}} рублей</span>
+                                      
+                                </b>
+                                <span style="display: block;
+                                padding-top: 15px;     font-size: 14px;">Количество фотографий {{plan.PhotoToBuyCount}}</span>
+                        </div>
+                </div>
+                <div style="padding: 0;
+            border: 0;
+            outline: 0;
+            font-weight: inherit;
+            vertical-align: baseline;
+            background: 0;">
+                        <a (click)="subscribePlan(plan)" style="display: block;
+                    margin: 0;
+                    padding: 0;
+                    width: 200px;
+                    height: 40px;
+                    background-color: #24b76d;
+                    text-align: center;
+                    text-decoration: none;
+                    line-height: 40px;
+                    color: #fff;     cursor: pointer;">
+                                Выбрать тариф
+                        </a>
+                        <a style="display: block;
+                    margin: 0;
+                    width: 0;
+                    height: 0;
+                    border-left: 100px solid transparent;
+                    border-right: 100px solid transparent;
+                    border-top: 10px solid #24b76d;"></a>
+                </div>
+
+        </div>
+</md-card>

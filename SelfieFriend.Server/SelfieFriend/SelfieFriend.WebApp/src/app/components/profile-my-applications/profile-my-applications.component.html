@@ -1,0 +1,67 @@
+<div *ngIf="pusto"> <h1 align="center">Вы не оставили ни одной заявки.</h1></div>
+<div style="margin-left: 10px;" *ngIf="!pusto" >
+  <table style="border-collapse: collapse;" cellpadding="1" cellspacing="1">
+    <tr style="height: 30px; background-color:lightblue ;border: solid 1px #659EC7;"> 
+  <td width="300" align="center">Заявка кому</td> 
+<td width="300" align="center">Описание заявки</td> 
+<td width="200" align="center">Цена заявки</td> 
+<td width="300" align="center">Изображение</td> 
+<td width="300" align="center">Действия</td> 
+
+    </tr>
+    <tbody *ngFor="let application of reseivedMyApplication | paginate: { itemsPerPage: 4, currentPage: p2, id: 'second' }">
+        
+      <tr>
+        <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;"> 
+<span  style="color:#000; word-break: break-all;">{{application.OfferingUserFirstName}} {{application.OfferingUserLastName}}</span> 
+</td> 
+
+<td  align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;"> 
+<span style="color:#000; word-break: break-all;">{{application.Text}}</span> 
+</td> 
+
+<td  align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;"> 
+<span style="color:#000; word-break: break-all;">{{application.Price}}$</span> 
+</td> 
+
+<td  align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;"> 
+<img src="{{application.OfferingPhoto}}" (click)="openDialog(application.OfferingPhoto)"  style="color:#000;  max-width:150px;"/> 
+</td> 
+
+<td  align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;"> 
+  
+  <div *ngIf="!application?.ReadyToDownload&&application?.ReadyToBay">
+   
+     <button [disabled]="proverka==false && application.ApplicationId==applicationid"  md-raised-button  color="primary"  (click)="PayOffer(application)">Оплатить</button>
+       <div *ngIf="proverka==false && application.ApplicationId==applicationid" >
+        <span><md-icon>done</md-icon></span>
+        </div>
+<br>
+<br>
+  </div>
+
+  <div *ngIf="application?.ReadyToDownload">
+    <button id="btn" color="primary"  md-raised-button (click)="DownloadImage(application.ApplicationId)">Скачать файл</button>
+        <!-- Гиперссылка. Срабатывает тогда когда мы нажимаем на кнопку id="btn"  -->
+        <a #DowFile id="dow" href="" style="display:none;" download="downlaod.jpg" > Download</a>
+        
+  </div>
+
+  <div *ngIf="!application?.ReadyToDownload&&!application?.ReadyToBay">
+    <p> Ожидаем загрузки фотографии, как только фото будет загружено появится кнопка "Оплатить" </p>
+    </div>
+</td>  
+  </table>
+  <div class="row">
+      <div  style="margin-left: 35%; margin-right:40%; width: 500px;">
+  <pagination-controls (pageChange)="p2 = $event" id="second"
+  previousLabel="Назад"
+  nextLabel="Вперед">
+  </pagination-controls>
+      </div>
+</div>
+</div>
+      
+
+
+  

@@ -1,0 +1,8 @@
+{
+    "/api":{
+        "target":"http://sefiefriendold20170707060521.azurewebsites.net",
+        "secure":true,
+        "logLevel":"debug",
+        "changeOrigin": true
+    }
+}

@@ -1,0 +1,98 @@
+<!-- ДОБАВЛЕНИЕ-->
+  <div *ngIf="MyOffer[0].Add "> 
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()" novalidate>
+<h2 md-dialog-title>Добавление предложения</h2>
+<md-dialog-content >
+<md-input-container class="example-full-width" >
+  <textarea mdInput #Description maxlength="200" name="description" id="description" formControlName="description"
+  placeholder="Описание" [(ngModel)]="offer.Description" > </textarea>
+  <md-hint align="end">{{Description.value.length}} / 200</md-hint>
+  <div *ngIf="formGroup.get('description').dirty && formGroup.get('description').hasError('required')">
+    <md-error class="alert alert-danger">Введите описание<br></md-error>
+  </div>
+</md-input-container>
+<md-input-container class="example-full-width" >
+  <input mdInput #Cost placeholder="Стоимость" type="number"  maxlength="5" name="cost" id="cost" [(ngModel)]="offer.Cost"
+  formControlName="cost">
+  <md-hint align="end">{{Cost.value.length}}</md-hint>
+  <div *ngIf="formGroup.get('cost').dirty && formGroup.get('cost').hasError('required')">
+    <md-error class="alert alert-danger"> Введите стоимость<br></md-error>
+  </div>
+</md-input-container>
+<md-input-container class="example-full-width">
+<input mdInput #Title placeholder="Заголовок" maxlength="20" name="title" id="title" formControlName="title"
+[(ngModel)]="offer.Title">
+<md-hint align="end">{{Title.value.length}} / 20</md-hint>
+<div *ngIf="formGroup.get('title').dirty && formGroup.get('title').hasError('required')">
+    <md-error class="alert alert-danger"> Введите Заголовок<br></md-error>
+  </div>
+</md-input-container>
+<br>
+<br>
+
+<div>
+<img [src]="src" [hidden]="!src"><br>
+</div>
+<div >
+      <input type="file" accept="image/jpg,image/jpeg,image/png" imageUpload
+        (imageSelected)="selected($event)"
+        [resizeOptions]="resizeOptions"
+        [name]="adjaslkdj"
+        (onChange)="imageUploaded($event)">
+</div>
+</md-dialog-content>
+<md-dialog-actions>
+ <button md-button class="md-button" type="submit" [disabled]="formGroup.invalid" (click)="submit()" [md-dialog-close]="true">Отправить</button>
+</md-dialog-actions>
+  </form>
+  
+</div>
+
+ <!--ВЫЗОВ С ПРОФИЛЯ кнопка РЕДАКТИРОВАТЬ-->
+<div *ngIf="MyOffer[0].Profile">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" novalidate>
+  <h2 md-dialog-title>Редактирование предложения</h2>
+  <md-dialog-content *ngFor="let change of MyOffer">
+    <md-input-container class="example-full-width" >
+    <textarea mdInput #Description maxlength="200" name="description" id="description" formControlName="description"
+  placeholder="Описание" [(ngModel)]="change.Description" > </textarea>
+  <md-hint align="end">{{Description.value.length}} / 200</md-hint>
+  <div *ngIf="formGroup.get('description').dirty && formGroup.get('description').hasError('required')">
+    <md-error class="alert alert-danger">Введите описание<br></md-error>
+  </div>
+    </md-input-container>
+    <md-input-container class="example-full-width">
+      <input mdInput #Cost placeholder="Стоимость" type="number" min="1" max="5" size="5" value="1" name="cost" id="cost" [(ngModel)]="change.Cost"
+  formControlName="cost">
+  <md-hint align="end">{{Cost.value.length}}</md-hint>
+  <div *ngIf="formGroup.get('cost').dirty && formGroup.get('cost').hasError('required')">
+    <md-error class="alert alert-danger">Введите описание<br></md-error>
+  </div>
+      </md-input-container>
+      <md-input-container class="example-full-width">
+        <input mdInput #Title placeholder="Заголовок" maxlength="20" name="title" id="title" formControlName="title"
+[(ngModel)]="change.Title">
+<md-hint align="end">{{Title.value.length}} / 20</md-hint>
+<div *ngIf="formGroup.get('title').dirty && formGroup.get('title').hasError('required')">
+    <md-error class="alert alert-danger">Введите описание<br></md-error>
+  </div>
+        </md-input-container>
+
+<br>
+<div>
+<img [src]="src" [hidden]="!src"><br>
+</div>
+<div >
+      <input   type="file" accept="image/jpg,image/jpeg,image/png" imageUpload
+        (imageSelected)="selected($event)"
+        [resizeOptions]="resizeOptions"
+        [name]="adjaslkdj"
+        (onChange)="imageUploaded($event)">
+</div>
+<p style="display:none">{{change.Id}}</p>
+<md-dialog-actions>
+ <button md-button class="md-button" [disabled]="formGroup.invalid" (click)="submitChange(change.Description,change.Title,change.Cost,change.Id)"   [md-dialog-close]="true">Изменить</button>
+</md-dialog-actions>
+</md-dialog-content>
+  </form>
+</div>

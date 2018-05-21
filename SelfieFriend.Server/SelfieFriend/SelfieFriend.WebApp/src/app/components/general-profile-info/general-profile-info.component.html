@@ -1,0 +1,72 @@
+<sm-loader [complete]="!isCompleted" class="inverted" text="Loading..."></sm-loader>
+<md-card animateIn style="padding-top: 60px !important; height: 540px;">
+    <div style="    display: -webkit-box;">
+        <div style="    padding-left: 20px;">
+            <md-card style="display: grid;">
+                <md-card-header>
+                    <h2 style="position: relative;
+                    top: -22px;
+                    margin-bottom: -15px;"> Profile</h2>
+                </md-card-header>
+                <div *ngIf="subscribe" style="    margin-left: 50px;">
+                        <sm-button class="positive" icon="check">Вы подписаны!</sm-button>
+                        <!-- <p>Начало подписки {{moment(subscribe.StartDate).format('LL')}}</p>
+                        <p>Конец подписки {{moment(subscribe.EndDate).format('LL')}}</p> -->
+                        <p>Количество фотографий {{subscribe.PhotoToBuyCount}}</p>
+                </div>
+                <div *ngIf="!subscribe" style="    margin-left: 50px;">
+                        <sm-button class="normal" icon="times">Вы не подписаны!</sm-button>
+                </div>
+                
+                <div style="display: inline-flex;     margin-top: 20px;">
+                    <div style="    width: 258px;
+                height: 258px;">
+                        <img style="border-radius: 20px; width: 258px;
+            height: 258px;" src="{{profile?.AvatarPath}}">
+                    </div>
+                    <div style="padding-left: 50px; float: left;">
+                        <md-input-container style="width: 300px; font-weight: 500;
+            font-size: 16px;
+            font-family: Roboto,sans-serif;" class="example-full-width">
+                            <input #name mdInput placeholder="First Name" [value]="profile?.FirstName">
+                        </md-input-container>
+                        <md-input-container style="width: 300px; font-weight: 500;
+                    font-size: 16px;
+                    font-family: Roboto,sans-serif;" class="example-full-width">
+                            <input #lastName mdInput placeholder="Last Name"  [value]="profile?.LastName">
+                        </md-input-container>
+                        <md-input-container style="width: 300px; font-weight: 500;
+                            font-size: 16px;
+                            font-family: Roboto,sans-serif;" class="example-full-width">
+                            <input #phone mdInput placeholder="Phone"  [value]="profile?.Phone">
+                        </md-input-container>
+                    </div>
+                    <div style="padding-left: 50px; float: right;">
+                        <md-input-container style="width: 350px; font-weight: 500;
+                                    font-size: 16px;
+                                    font-family: Roboto,sans-serif;" class="example-full-width">
+                            <input #email mdInput placeholder="Email"  [value]="profile?.Email">
+                        </md-input-container>
+                        <md-input-container style="width: 350px; font-weight: 500;
+                                            font-size: 16px;
+                                            font-family: Roboto,sans-serif;" class="example-full-width">
+                            <input #site mdInput placeholder="Personal Site"  [value]="profile?.Site">
+                        </md-input-container>
+                        <md-input-container style="width: 350px; font-weight: 500;
+                                                    font-size: 16px;
+                                                    font-family: Roboto,sans-serif;" class="example-full-width">
+                            <textarea #about matInput placeholder="AboutHim" [value]="profile?.AboutHim"></textarea>
+                        </md-input-container>
+                    </div>
+
+                </div>
+
+            </md-card>
+        </div>
+    </div>
+    <sm-button [disabled]="button" style="width: 120px;
+height: 35px;
+float: right;
+position: relative;
+padding-top: 8px;" class="primary" (click)="changeProfile(name.value,lastName.value,phone.value,email.value,site.value,about.value)" icon="edit">Edit Profile</sm-button>
+</md-card>

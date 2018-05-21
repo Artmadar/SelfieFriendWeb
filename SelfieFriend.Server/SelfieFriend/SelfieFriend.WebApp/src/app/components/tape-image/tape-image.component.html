@@ -1,0 +1,21 @@
+<sm-loader [complete]="!isCompleted" class="inverted" text="Loading..."></sm-loader>
+<div style="padding-top: 80px !important;     padding-left: 25px;">
+        <div style="display: inline-flex;">
+                <md-input-container style="width:100%">
+                                <input mdInput placeholder="Поиск" [(ngModel)]="text" style="margin-right: 20px;" #searcher>
+                            </md-input-container>
+                <angular2-multiselect style="width: 400px; margin-left: 20px;" [(ngModel)]="selectedItems" [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"
+                        (onSelect)="onItemSelect($event)"></angular2-multiselect>
+                <button md-button style="margin-right: 20px;" [disabled]="searchButton" class="md-button" type="submit" (click)="search(searcher.value)">Поиск</button>
+                <button md-button style="margin-right: 20px;" [disabled]="sbrosButton" class="md-button" type="submit" (click)="reset()">Сбросить</button>
+        </div>
+        <div>
+                <ks-modal-gallery 
+                [modalImages]="images" 
+                [slideConfig]="{infinite: false, sidePreviews: {show: false}}" 
+                [buttonsConfig]="customButtonsConfigExtUrlNewTab"
+                (buttonBeforeHook)="onCustomButtonBeforeHook($event)">
+        </ks-modal-gallery>
+        </div>
+
+</div>

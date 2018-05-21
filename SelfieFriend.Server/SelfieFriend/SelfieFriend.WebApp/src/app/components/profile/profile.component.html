@@ -1,0 +1,94 @@
+<md-card style="    padding-top: 60px !important;">
+
+    <br>
+    <img md-card-avatar src="{{reseivedProfile?.AvatarPath}}">
+    <span>{{reseivedProfile?.FirstName}} </span>
+    <span> {{reseivedProfile?.LastName}}</span>
+    
+    <br>
+    <br>
+<md-tab-group>
+ 
+  <md-tab label="Мои Предложения Селфи">
+   <div *ngIf="reseivedProfile==null">
+    <md-progress-bar mode="indeterminate"></md-progress-bar>
+    </div>
+  <profile-my-offers> </profile-my-offers>
+  </md-tab>
+
+  <md-tab label="Мои Заявки Селфи">
+      <profile-my-applications> Загрузка... </profile-my-applications>
+  </md-tab>
+  <md-tab label="Заявки мне Селфи">
+    <profile-applications-for-me> Загрузка...</profile-applications-for-me>
+  </md-tab>
+
+  <md-tab label="История загрузок">
+      <!-- <div style="margin-left: 10px;" *ngIf="pusto">
+          <table style="border-collapse: collapse;" cellpadding="1" cellspacing="1">
+                <tr style="height: 30px; background-color:lightblue ;border: solid 1px #659EC7;">
+                      <td width="300" align="center">Заявка от кого</td>
+                      <td width="300" align="center">Описание</td>
+                      <td width="200" align="center">Цена</td>
+                      <td width="300" align="center">Изображение</td>
+                      <td width="300" align="center">Загрузить фото</td>
+                </tr>
+    
+                <tbody *ngFor="let applicationUser of reseivedApplicationUser | paginate: { itemsPerPage: 4, currentPage: p3, id: 'third' }">
+                      <tr>
+                            <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                  <span style="color:#000; word-break: break-all;">{{applicationUser.ApplicationUserFirstName}} {{applicationUser.ApplicationUserLastName}}</span>
+                            </td>
+    
+                            <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                  <span style="color:#000; word-break: break-all;">{{applicationUser.Text}}</span>
+                            </td>
+    
+                            <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                  <span style="color:#000; word-break: break-all;">{{applicationUser.Price}}</span>
+                            </td>
+    
+                            <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                  <img src="{{applicationUser.OfferingPhoto}}" (click)="openDialog(applicationUser.OfferingPhoto)" style="color:#000;  max-width:150px;"
+                                  />
+                            </td>
+    
+                            <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+    
+    
+                                  <div *ngIf="applicationUser?.Uploaded">
+                                        <p> Загрузка фотографии осуществлена</p>
+                                  </div>
+                                  <div *ngIf="!applicationUser?.Uploaded">
+                                        <input type="file" accept="image/jpg,image/jpeg,image/png" imageUpload (imageSelected)="OnSelectedImage($event)" [resizeOptions]="resizeOptions"
+                                              [name]="adjaslkdj" (onChange)="imageUploaded($event)">
+                                        <br>
+                                        <br>
+                                        <div *ngIf="proverka==true && applicationUser.ApplicationId==applicationid">
+                                              <span style="color: red;"> Выберите картинку </span>
+                                        </div>
+                                        <div>
+                                              <button [disabled]=" proverka==false && applicationUser.ApplicationId==applicationid" md-raised-button color="primary" (click)="submit(applicationUser);">Загрузить фото</button>
+                                        </div>
+                                        <div *ngIf="proverka==false && applicationUser.ApplicationId==applicationid">
+                                              <md-icon>done</md-icon>
+                                        </div>
+                                  </div>
+    
+                                  <br>
+    
+                            </td>
+                      </tr>
+          </table>
+          <div class="row">
+                <div style="margin-left: 35%; margin-right:40%; width: 500px;">
+                      <pagination-controls (pageChange)="p3 = $event" id="third" previousLabel="Назад" nextLabel="Вперед">
+    
+                      </pagination-controls>
+                </div>
+          </div>
+    </div> -->
+    </md-tab>
+</md-tab-group>
+    
+</md-card>

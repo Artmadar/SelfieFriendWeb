@@ -1,0 +1,73 @@
+<div class="headerMain">
+
+  <div class="header">
+    <sm-menu title="Selfie-Friend Web" class="inverted teal" logo="/assets/images/selfie-logo.png">
+      <a *ngIf="auth === true" sm-item routerLink="welcome" icon="home">Главная старница</a>
+      <a *ngIf="auth === true" sm-item icon="info circle">Партнерам</a>
+      <a *ngIf="auth === false" sm-item routerLink="tape" icon="image">Покупка Селфи</a>
+      <a *ngIf="auth === false" sm-item routerLink="tapeImage" icon="images">Покупка Изображений</a>
+      <a *ngIf="auth === false" sm-item routerLink="profile" icon="cogs">Заказы</a>
+      <a *ngIf="auth === false" sm-item routerLink="tarif" icon="star">Тарифные планы</a>
+      <sm-menu class="menu right secondary">
+        <a *ngIf="auth === true" sm-item href="https://oauth.vk.com/authorize?client_id=6082258&display=page&redirect_uri=http://localhost:4200/accesstoken"
+          icon="sign in alt">Войти</a>
+          <div *ngIf="auth === false" class="dropdown">
+              <i class="fa fa-caret-down"></i>
+            <button class="dropbtn">Добавить 
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <a (click)="openDialog(Add)">Добавить селфи</a>
+              <a (click)="openDialogPhotoAdd()">Добавить фото</a>
+            </div>
+          </div> 
+        <a *ngIf="auth === false" sm-item routerLink="generalProfile" image="{{reseivedProfile?.AvatarPath}}">{{reseivedProfile?.FirstName}} {{reseivedProfile?.LastName}}</a>
+        <a *ngIf="auth === false" sm-item (click)="exitToVk()" routerLink="welcome" icon="sign out alt">Выйти</a>
+      </sm-menu>
+    </sm-menu>
+  </div>
+
+</div>
+
+
+
+<!-- <md-toolbar color="primary" id="header">
+  <md-icon>home</md-icon>
+  <span  > Selfie-Friend Web</span>
+  <div class="example-button-row">
+    <a  md-button  routerLink="tape">Главная страница</a>
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+  <md-icon>apps</md-icon>
+</button>
+<md-menu #menu="mdMenu"> 
+  <button (click)="openDialog(Add)" md-menu-item>
+    <md-icon>add</md-icon>
+    <span> Добавить</span>
+  </button>
+  <button routerLink="profile" md-menu-item>
+    <md-icon>account_box</md-icon>
+    <span>Профиль</span>
+  </button>
+  <button routerLink="chat" md-menu-item>
+    <md-icon>chat</md-icon>
+    <span>Чат</span>
+  </button>
+  <button (click)="exitToVk()"routerLink="."   md-menu-item>
+    <md-icon>exit_to_app</md-icon>
+    <span>Выйти</span>
+  </button>
+</md-menu>
+  </div>
+</md-toolbar> -->
+<div id="body">
+  <router-outlet> </router-outlet>
+</div>
+<!-- <div style="background-color: black;" class="ui inverted vertical footer segment form-page">
+  <div class="ui container">
+    <div style="    display: inline-flex;">
+    <img style="    height: 30px;
+    width: 50px;" src="/assets/images/selfie-logo.png">
+    <p style="padding-left: 10px;">Selfie Friend 2018. All Rights Reserved</p>
+  </div>
+  </div>
+</div> -->

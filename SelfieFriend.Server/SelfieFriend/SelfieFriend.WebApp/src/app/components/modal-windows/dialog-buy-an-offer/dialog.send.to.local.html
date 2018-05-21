@@ -1,0 +1,18 @@
+<h2 md-dialog-title>Купить</h2>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()" novalidate>
+<md-dialog-content>
+<md-input-container class="example-full-width">
+
+<textarea mdInput #Description maxlength="200" formControlName="text" [(ngModel)]="offerBuy.Text"></textarea>
+<md-hint align="end">{{Description.value.length}} / 200</md-hint>
+<div *ngIf="formGroup.get('text').dirty && formGroup.get('text').hasError('required')">
+    <md-error class="alert alert-danger">Введите Текст<br></md-error>
+  </div>
+  
+</md-input-container>
+</md-dialog-content>
+<md-dialog-actions>
+  <button md-button [md-dialog-close]="true" [disabled]="formGroup.invalid" (click)="SubmitOffer()">Отправить</button>
+</md-dialog-actions>
+
+</form>

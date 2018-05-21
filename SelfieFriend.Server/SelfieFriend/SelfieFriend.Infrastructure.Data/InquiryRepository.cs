@@ -17,6 +17,7 @@ namespace SelfieFriend.Infrastructure.Data
 
         public List<Inquiry> GetList()
         {
+
            return _db.Inquiries.ToList();
         }
 

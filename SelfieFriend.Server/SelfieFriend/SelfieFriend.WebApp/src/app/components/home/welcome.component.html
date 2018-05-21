@@ -1,0 +1,184 @@
+<md-card animateIn style="padding-top: 60px !important;">
+  <!-- <md-card class="example-card"> -->
+  <md-card-header>
+  </md-card-header>
+  <!-- <div class="main"> -->
+  <div class="gallery">
+    <kb-page-slider style="overflow: hidden;
+    display: block;
+    position: relative;
+    height: 500px;
+    width: 100%;border-radius: 5px; font-weight: 500;
+    line-height: 1.25;
+    color: inherit;
+    font-family: Frank,Arial,Helvetica,sans-serif;" [overlayIndicator]="false" dotColor="black" [(page)]="pageNumber" (pageCountChange)="pageCount = $event">
+
+      <!-- Pages -->
+      <div *kbPages="let page of pages" [style.backgroundImage]="'url('+ page.image +')'">
+        <div class="pageTitle">{{page.title}}</div>
+      </div>
+      <kb-nav-button backward [showBackground]="true" [(page)]="pageNumber" [pageCount]="pageCount">
+      </kb-nav-button>
+
+      <kb-nav-button forward [showBackground]="true" [(page)]="pageNumber" [pageCount]="pageCount">
+      </kb-nav-button>
+
+    </kb-page-slider>
+
+  </div>
+  <md-card style="border-radius: 5px;" class="textFooter">
+    <div style="align-self: flex-end;">
+      <div class="gallery" style="background-color: rgba(255,255,255,.9);
+          padding: 12px 0;">
+        <h3 style="margin: 5px; font-weight: 500;
+        line-height: 1.25;
+        color: inherit;
+        font-family: Frank,Arial,Helvetica,sans-serif;">
+          Потрясающие материалы, понятные цены
+          <sm-button class="primary" (click)="clickMe($event)" icon="sign in alt"><a style="color:black" href="https://oauth.vk.com/authorize?client_id=6082258&display=page&redirect_uri=http://localhost:4200/accesstoken">Вконтакте</a></sm-button>
+          
+        </h3>
+      </div>
+    </div>
+  </md-card>
+  <div class="content">
+    <!-- <crystal-gallery [images]="myImages" [config]="myConfig"></crystal-gallery> -->
+    <div class="container"> 
+    <h3 class="md-text-auth">
+      Найдите потрясающие материалы для своего следующего проекта 
+    </h3>
+    <div class="row-tight"> 
+
+      <div class="col-xs-6 col-sm-4 category">
+      <div class="container-image">
+  <img class="img-cat" src="https://img.drive.ru/i/0/59940197ec05c42b2d00000f.jpg"> 
+      </div>
+      <h4 class="caption-category">Автомобили</h4>
+      <p class="description-category">Наша коллекция фотографий автомобилей порадует вас своим качетвом а также потрясающей детализацией.</p>
+      </div>
+
+      <div class="col-xs-6 col-sm-4 category">
+          <div class="container-image">
+      <img class="img-cat" src="https://i.ytimg.com/vi/r-Rb58es-Vw/maxresdefault.jpg"> 
+          </div>
+          <h4 class="caption-category">Природа</h4>
+          <p class="description-category">Наша коллекция фотографий автомобилей порадует вас своим качетвом а также потрясающей детализацией.</p>
+          </div>
+
+          <div class="col-xs-6 col-sm-4 category">
+              <div class="container-image">
+          <img class="img-cat" src="https://ak.picdn.net/assets/cms/14c40a5a7a7f50788cf9e346071ab49ad1201b12-17d705f0349ed08f5387b39c7644054a59affe52-LOHP_vector_module_shutterstock_307324316-min.jpg"> 
+              </div>
+              <h4 class="caption-category">Векторные изображения</h4>
+              <p class="description-category">Наша коллекция фотографий автомобилей порадует вас своим качетвом а также потрясающей детализацией.</p>
+              </div>
+
+
+              <div class="col-xs-6 col-sm-4 category">
+                  <div class="container-image">
+              <img class="img-cat" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhIYh7zsns0LwQPQ-swFJbF7wu1TRl6Q7Jy3_j2kZJbt_NVP1y"> 
+                  </div>
+                  <h4 class="caption-category">Архитектура</h4>
+                  <p class="description-category">Наша коллекция фотографий автомобилей порадует вас своим качетвом а также потрясающей детализацией.</p>
+                  </div>
+
+                 
+    </div>
+
+    <h3 class="md-text-auth">
+        Присоединяйтесь к Selfie-Friend и смотрите лучшие фотографии каждый день! 
+       </h3>
+       <div class="row-tight"> 
+          <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+              <div class="container-image-free" style="padding: 8px;">
+                  <img class="img-free" src="https://img.drive.ru/i/0/59940197ec05c42b2d00000f.jpg">
+                  <span>- Категория Авто<br /> Lada Vesta</span>
+              </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                <div class="container-image-free" style="padding: 8px;">
+                    <img class="img-free" src="https://cs3.gtavicecity.ru/attachments/2015-08/original/97eea81b149b00bf959e8f4797b6788a32656a59/5577-287486-2015-08-17-203516.jpg">
+                    <span>- Категория Авто<br /> Lamborghini Aventador</span>
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                  <div class="container-image-free" style="padding: 8px;">
+                      <img class="img-free" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEbsuSRyPQZgF4zCRcAYujqHd0rkfs_PY59NhOw8b9ZffrhwKf">
+                      <span>- Категория Природа<br /> Природа России</span>
+                  </div>
+                </div>
+
+                <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                    <div class="container-image-free" style="padding: 8px;">
+                        <img class="img-free" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRgmukWg0b-NPX0tfJC1QP4svLnkPlhqDrlga9MWL6ejp3RaXRjjQ">
+                        <span>- Категория Природа<br /> Природа Кавказа</span>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                      <div class="container-image-free" style="padding: 8px;">
+                          <img class="img-free" src="https://cdn-s-static.arzamas.academy/uploads/ckeditor/pictures/1926/content_univer.jpg">
+                          <span>- Категория Архитектура<br /> Национал-католическая архитектура</span>
+                      </div>
+                    </div>
+
+                    <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                        <div class="container-image-free" style="padding: 8px;">
+                            <img class="img-free" src="http://astravel.ru/portal/uploads/posts/2017-08/thumbs/1503090391_1.jpg">
+                            <span>- Категория Архитектура<br /> Барселона. Архитектура. Гауди</span>
+                        </div>
+                      </div>
+
+                      <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                          <div class="container-image-free" style="padding: 8px;">
+                              <img class="img-free" src="https://i.ytimg.com/vi/4ku-cwVo58Y/maxresdefault.jpg">
+                              <span>- Категория Природа<br /> Тихая заводь</span>
+                          </div>
+                        </div>
+
+                        <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                            <div class="container-image-free" style="padding: 8px;">
+                                <img class="img-free" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_UNSlTwq7D7FLkXFp6Ekq-gaz1tHWKZNZuTNwS-TAc-FCt9Ie">
+                                <span>- Категория Архитектура<br /> Архитектура Москвы</span>
+                            </div>
+                          </div>
+
+                          <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                              <div class="container-image-free" style="padding: 8px;">
+                                  <img class="img-free" src="https://img.gazeta.ru/files3/417/8108417/Rolls-Royce-pic905-895x505-24725.jpg">
+                                  <span>- Категория Автомобили<br /> Rolls Royce</span>
+                              </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                                <div class="container-image-free" style="padding: 8px;">
+                                    <img class="img-free" src="https://i.ytimg.com/vi/kRrFcWDDU1U/maxresdefault.jpg">
+                                    <span>- Категория Природа<br /> Россия. Саратовская природа</span>
+                                </div>
+                              </div>
+
+                              <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                                  <div class="container-image-free" style="padding: 8px;">
+                                      <img class="img-free" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDmy0P3pBWGvbxUxyWjiZd61LqSc0FgeGGsydXJ0irjuIaMram">
+                                      <span>- Категория Архитектура<br /> Великобритания. Лондон</span>
+                                  </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-4 category" style="    background-color: white; transition: all 0.25s ease-in;">
+                                    <div class="container-image-free" style="padding: 8px;">
+                                        <img class="img-free" src="https://autodromo.ru/sites/default/files/testdrives/photos/086a040e97699dc78ef3f5e7c78267db_orig.jpg">
+                                        <span>- Категория Автомобили<br /> Автомобиль Skoda</span>
+                                    </div>
+                                  </div>
+       </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- </div> -->
+  <!-- </md-card> -->
+</md-card>

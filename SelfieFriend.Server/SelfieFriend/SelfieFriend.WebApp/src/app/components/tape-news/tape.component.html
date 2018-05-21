@@ -1,0 +1,61 @@
+<div *ngIf="pusto">
+     <h1 align="center"> Здесь скоро что нибудь появится :) </h1> 
+    </div>
+    <div class="search-results"
+         infinite-scroll
+         [infiniteScrollDistance]="8"
+         [infiniteScrollThrottle]="150"
+         (scrolled)="onScrollDown()">
+    
+    <md-card animateIn style="padding-top: 60px !important;">
+       <go-top-button [html]="'<span> Вверх</span>'"
+                 [animate]="true"
+                 [speed]="100"
+                 [acceleration]="2"
+                 [scrollDistance]="2500"
+                 [styles]="{
+                    'top': '0px',
+                    'left':'0px',
+                    'color': 'black',
+                    'height': '100%',
+                    'width': '8%',
+                    'font-size':'20px',
+                    'background-color':'green, transparent'
+
+                 }"
+                 [html]="{
+                 }">
+  </go-top-button>
+<md-card *ngFor="let offering of receivedTape;" style="    margin-bottom: 20px;" class="example-card">
+
+  <md-card-header>
+    <img md-card-avatar src="{{offering.AvatarPath}}">
+    
+    <md-card-title style="font-size:18px">{{offering.Title}}</md-card-title>
+    <md-card-subtitle style="font-size:18px">{{offering.FirstName}} {{offering.LastName}}</md-card-subtitle>
+  </md-card-header>
+  <img md-card-image src="{{offering.ImagePath}}" >
+  <md-card-content>
+    <p style=" font-size: 18px; word-wrap: break-word;">
+      {{offering.Description}}
+
+    </p>
+     <span style="font-size: 15px;"> Цена: {{offering.Price}}</span>
+
+  </md-card-content>
+  <md-card-actions class="left">
+    <div *ngIf="!offering?.Checked">
+    <button md-raised-button color="accent" id="submit" (click)="openDialog(offering)" style="width:100px;height:50px; font-size:16px;">Купить</button>
+    </div>
+    <div *ngIf="offering?.Checked ">
+      <md-icon>done</md-icon> <span style="font-size: 15px;" > Заявка отправлена</span> <br> <br>
+      <button md-raised-button color="warn" (click)="cancelOffer(offering)" style="width:200px;height:50px; font-size:16px;">Отменить покупку</button>
+    </div>
+
+  </md-card-actions>
+  <br>
+</md-card>
+<div *ngIf="receivedTape==null">
+ <md-progress-bar mode="indeterminate"></md-progress-bar></div>
+</md-card>
+    </div>

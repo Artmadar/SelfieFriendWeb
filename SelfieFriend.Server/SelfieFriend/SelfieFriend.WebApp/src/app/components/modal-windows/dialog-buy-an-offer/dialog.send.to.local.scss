@@ -1,0 +1,13 @@
+.example-full-width {
+  width: 100%;
+}
+
+:host() /deep/ {
+  .mat-dialog-container {
+    border-radius: 15px !important;
+  }
+  .mat-dialog-content {
+    display: contents;
+    
+  }
+}
