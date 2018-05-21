@@ -45,11 +45,15 @@
     <Compile Include="Inquiry.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="Offering.cs" />
+    <Compile Include="OfferingCategory.cs" />
     <Compile Include="OfferingPhoto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Purchase.cs" />
+    <Compile Include="PurchasedSubscribe.cs" />
     <Compile Include="PurchasePhoto.cs" />
+    <Compile Include="SubscribePlan.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="UserBuyOffering.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

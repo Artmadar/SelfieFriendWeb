@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace SelfieFriend.Domain.Core
 {
     public class Offering: BaseSelfieFriendEntity
@@ -15,24 +14,38 @@ namespace SelfieFriend.Domain.Core
 
         public User User { get; set; }
 
-
         public string Title { get; set; }
 
         public string Desctiption { get; set; }
 
         public decimal Price { get; set; }
 
-
         public DateTime DateCreated { get; set; }
 
         public IEnumerable<Inquiry> Inquiries { get; set; }
 
+        public int OfferingTypeId { get; set; }
+
+        public int? OfferingCategoryId { get; set; }
+
+        public OfferingCategory OfferingCategory { get; set; }
 
         public bool Closed { get; set; }
+
+        public IEnumerable<UserBuyOffering> UserBuyOfferings { get; set; }
+
 
         public Offering()
         {
             Inquiries=new List<Inquiry>();
+            UserBuyOfferings = new List<UserBuyOffering>();
         }
     }
+
+    public enum OfferingType
+    {
+        Selfie=0,
+        Sale=1
+    }
+
 }

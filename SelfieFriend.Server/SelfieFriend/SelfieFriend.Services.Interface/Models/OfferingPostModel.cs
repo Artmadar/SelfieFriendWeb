@@ -22,6 +22,9 @@ namespace SelfieFriend.Services.Interface.Models
 
         public string Description { get; set; }
 
+        public string CategotyName { get; set; }
+        
+        public int CategoryId { get; set; }
 
         public bool Checked { get; set; }
     }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace SelfieFriend.Models
+﻿namespace SelfieFriend.Models
 {
     public class PhotoModel
     {
@@ -12,5 +7,6 @@ namespace SelfieFriend.Models
         public decimal Cost { get; set; }
         public string Photo { get; set; }
         public string Title { get; set; }
+        public int CategoryId { get; set; }
     }
 }

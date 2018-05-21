@@ -23,5 +23,13 @@ namespace SelfieFriend.Infrastructure.Data
 
         public DbSet<Message> Messages { get; set; }
 
+        public DbSet<OfferingCategory> OfferingCategories { get; set; }
+
+        public DbSet<PurchasedSubscribe> PurchasedSubscribes { get; set; }
+
+        public DbSet<SubscribePlan> SubscribePlans { get; set; }
+
+        public DbSet<UserBuyOffering> UserBuyOfferings { get; set; }
+
     }
 }

@@ -25,18 +25,28 @@ namespace SelfieFriend.Infrastructure.Business
         }
 
 
-        public List<OfferingPostModel> Get(string hostPort, int vkId)
+        public List<OfferingPostModel> Get(string hostPort, int vkId, OfferingType offeringType)
         {
-            var offerings = _offeringRepository.GetListWithUsersAndPhotos().Where(o=>o.User.VkId!=vkId).ToList();
+            var offerings = _offeringRepository.GetListWithUsersAndPhotos(offeringType);//.Where(o=>o.User.VkId!=vkId).ToList();
             var offeringModels = CreateOfferingPostModelsRevers(offerings, hostPort, vkId);
 
             return offeringModels;
         }
 
-        public List<OfferingPostModel> Get(string hostPort, int vkId, int startposition, int count)
+
+        public List<OfferingPostModel> GetWithSerach(OfferingType offeringType,int vkId, string hostPort, string search, int CategoryId = 0)
+        {
+            var offerings = _offeringRepository.GetListWithSerach(offeringType, search, CategoryId);//.Where(o => o.User.VkId != vkId).ToList();
+            var offeringModels = CreateOfferingPostModelsRevers(offerings, hostPort, vkId);
+            return offeringModels;
+        }
+
+
+
+        public List<OfferingPostModel> Get(string hostPort, int vkId, int startposition, int count, OfferingType offeringType)
         {
 
-            var offerings = _offeringRepository.GetRangeList(startposition, count, vkId)
+            var offerings = _offeringRepository.GetRangeList(startposition, count, vkId,offeringType)
                 .Where(o => o.User.VkId != vkId).ToList();
             var offeringModels = CreateOfferingPostModels(offerings, hostPort, vkId);
 
@@ -46,9 +56,9 @@ namespace SelfieFriend.Infrastructure.Business
         }
 
 
-        public List<OfferingPostModel> GetUserOfferings(string hostPort, int vkId)
+        public List<OfferingPostModel> GetUserOfferings(string hostPort, int vkId, OfferingType offeringType)
         {
-            var offerings = _offeringRepository.GetListWithUsersAndPhotos().Where(o => o.User.VkId == vkId).ToList();
+            var offerings = _offeringRepository.GetListWithUsersAndPhotos(offeringType).Where(o => o.User.VkId == vkId).ToList();
             var offeringModels = CreateOfferingPostModelsRevers(offerings, hostPort, vkId);
 
             return offeringModels;
@@ -79,7 +89,7 @@ namespace SelfieFriend.Infrastructure.Business
         }
 
         //Need to test
-        public void OfferChange(int offeringId, string filePath, int vkId, decimal price, string description, string title)
+        public void OfferChange(int offeringId, string filePath, int vkId, decimal price, string description, string title, int categoryId)
         {
             var offering = _offeringRepository.Get(offeringId);
 
@@ -91,12 +101,17 @@ namespace SelfieFriend.Infrastructure.Business
             offering.Price = price;
             offering.Desctiption = description;
             offering.Title = title;
+            if (categoryId != 0)
+            {
+                offering.OfferingCategoryId = categoryId;
+            }
+           
             
             _offeringRepository.Update(offering);
 
         }
 
-        public void OfferChange(int offeringId, int vkId, decimal price, string description, string title)
+        public void OfferChange(int offeringId, int vkId, decimal price, string description, string title,int categoryId)
         {
             var offering = _offeringRepository.Get(offeringId);
 
@@ -107,12 +122,18 @@ namespace SelfieFriend.Infrastructure.Business
             offering.Desctiption = description;
             offering.Title = title;
 
+            if (categoryId != 0)
+            {
+                offering.OfferingCategoryId = categoryId;
+            }
+
             _offeringRepository.Update(offering);
         }
 
         //need to test
-        public void Create(string filePath, int vkId, decimal price, string description, string title)
+        public void Create(string filePath, int vkId, decimal price, string description, string title, int categoryId,OfferingType offeringType)
         {
+            var offeringTypeId = (int)offeringType;
             var offering = new Offering();
             var photo = new OfferingPhoto();
 
@@ -123,10 +144,41 @@ namespace SelfieFriend.Infrastructure.Business
             offering.Desctiption = description;
             offering.Title = title;
             offering.DateCreated = DateTime.UtcNow;
+            offering.OfferingTypeId = offeringTypeId;
+            if (categoryId != 0)
+            {
+                offering.OfferingCategoryId = categoryId;
+            }
 
             _offeringRepository.Create(offering);
 
         }
+
+
+        public void Create(string originalFilePath,string wmFilePath, int vkId, decimal price, string description, string title, int categoryId, OfferingType offeringType)
+        {
+            var offeringTypeId = (int)offeringType;
+            var offering = new Offering();
+            var photo = new OfferingPhoto();
+
+            photo.ImagePath = originalFilePath;
+            photo.ImageWithWaterMarkPath = wmFilePath;
+            offering.UserId = _userService.GetUserByVkId(vkId).Id;
+            offering.OfferingPhoto = photo;
+            offering.Price = price;
+            offering.Desctiption = description;
+            offering.Title = title;
+            offering.DateCreated = DateTime.UtcNow;
+            offering.OfferingTypeId = offeringTypeId;
+            if (categoryId != 0)
+            {
+                offering.OfferingCategoryId = categoryId;
+            }
+
+            _offeringRepository.Create(offering);
+
+        }
+
 
         public void CloseOffering(int vkId, int offeringId)
         {
@@ -148,6 +200,8 @@ namespace SelfieFriend.Infrastructure.Business
         {
             var offeringModels = new List<OfferingPostModel>();
 
+            var userId = _userService.GetUserByVkId(vkId).Id;
+
             foreach (var offering in offerings)
             {
                 string path = offering.User.AvatarPath;
@@ -158,22 +212,42 @@ namespace SelfieFriend.Infrastructure.Business
 
 
 
-                offeringModels.Add(item: new OfferingPostModel()
+                var imagePath = offering.OfferingPhoto.ImageWithWaterMarkPath == null ? Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath) : Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImageWithWaterMarkPath);
+
+
+                
+
+
+                var item = new OfferingPostModel();
+
+                item.OfferingId = offering.Id;
+                item.FirstName = offering.User.FirstName;
+                item.LastName = offering.User.LastName;
+                item.ImagePath = imagePath;
+                item.Title = offering.Title;
+                item.Price = offering.Price.ToString(CultureInfo.InvariantCulture);
+                item.DateCreated = offering.DateCreated;
+                item.AvatarPath = path;
+                item.Description = offering.Desctiption;
+                item.CategoryId = offering.OfferingCategoryId ?? 0;
+                item.CategotyName = offering.OfferingCategory != null ? offering.OfferingCategory.Name : "NoCategory";
+
+                var offeringType = (OfferingType)offering.OfferingTypeId;
+                switch (offeringType)
                 {
-                    OfferingId = offering.Id,
-                    FirstName = offering.User.FirstName,
-                    LastName = offering.User.LastName,
-                    ImagePath = Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath),
-                    Title = offering.Title,
-                    Price = offering.Price.ToString(CultureInfo.InvariantCulture),
-                    DateCreated = offering.DateCreated,
-                    AvatarPath = path,
-                    Description = offering.Desctiption,
+                    case OfferingType.Selfie:
+                        item.Checked = _inquiryService.IsExistInquiryOnOffering(vkId, offering.Id);
+                        break;
+                    case OfferingType.Sale:
+                        item.Checked = offering.UserBuyOfferings.FirstOrDefault(x => x.UserId == userId) != null;
+                        break;
+                    default:
+                        break;
 
-                    Checked = _inquiryService.IsExistInquiryOnOffering(vkId, offering.Id),
+                }
 
-
-                });
+               
+                offeringModels.Add(item);
             }
 
             offeringModels.Reverse();
@@ -201,7 +275,7 @@ namespace SelfieFriend.Infrastructure.Business
                 offeringPostModel.LastName = offering.User.LastName;
      
 
-                offeringPostModel.ImagePath = Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath);
+                offeringPostModel.ImagePath  = offering.OfferingPhoto.ImageWithWaterMarkPath == null ? Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath) : Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImageWithWaterMarkPath);
                 offeringPostModel.Title = offering.Title;
                 offeringPostModel.Price = offering.Price.ToString(CultureInfo.InvariantCulture);
                 offeringPostModel.DateCreated = offering.DateCreated;
@@ -210,25 +284,9 @@ namespace SelfieFriend.Infrastructure.Business
 
                 offeringPostModel.Checked = _inquiryService.IsExistInquiryOnOffering(vkId, offering.Id);
 
+                offeringPostModel.CategotyName = offering.OfferingCategory != null ? offering.OfferingCategory.Name : "NoCategory";
+
                 offeringModels.Add(offeringPostModel);
-
-
-                //offeringModels.Add(item: new OfferingPostModel()
-                //{
-                //    OfferingId = offering.Id,
-                //    FirstName = offering.User.FirstName,
-                //    LastName = offering.User.LastName,
-                //    ImagePath = Path.Combine("http://", hostPort + @"/" + offering.OfferingPhoto.ImagePath),
-                //    Title = offering.Title,
-                //    Price = offering.Price.ToString(CultureInfo.InvariantCulture),
-                //    DateCreated = offering.DateCreated,
-                //    AvatarPath = path,
-                //    Description = offering.Desctiption,
-
-                //    Checked = _inquiryService.IsExistInquiryOnOffering(vkId, offering.Id),
-
-
-                //});
             }
             return offeringModels;
         }

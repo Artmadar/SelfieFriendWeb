@@ -69,12 +69,52 @@
     <Compile Include="Migrations\201707190656360_AddMessageEntity.Designer.cs">
       <DependentUpon>201707190656360_AddMessageEntity.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805060914466_AddOfferingsCategory.cs" />
+    <Compile Include="Migrations\201805060914466_AddOfferingsCategory.Designer.cs">
+      <DependentUpon>201805060914466_AddOfferingsCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805060949102_FillOfferingsCategories.cs" />
+    <Compile Include="Migrations\201805060949102_FillOfferingsCategories.Designer.cs">
+      <DependentUpon>201805060949102_FillOfferingsCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.cs" />
+    <Compile Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.Designer.cs">
+      <DependentUpon>201805061027595_OfferingToOfferingCategoryRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805061137246_AddPurchasedSubscribe.cs" />
+    <Compile Include="Migrations\201805061137246_AddPurchasedSubscribe.Designer.cs">
+      <DependentUpon>201805061137246_AddPurchasedSubscribe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091355269_AddSubscribes.cs" />
+    <Compile Include="Migrations\201805091355269_AddSubscribes.Designer.cs">
+      <DependentUpon>201805091355269_AddSubscribes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091409119_FillPlans.cs" />
+    <Compile Include="Migrations\201805091409119_FillPlans.Designer.cs">
+      <DependentUpon>201805091409119_FillPlans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805171208073_AddNewFieldToSubscribes.cs" />
+    <Compile Include="Migrations\201805171208073_AddNewFieldToSubscribes.Designer.cs">
+      <DependentUpon>201805171208073_AddNewFieldToSubscribes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805191636337_AddImageWithWaterMarkPath.cs" />
+    <Compile Include="Migrations\201805191636337_AddImageWithWaterMarkPath.Designer.cs">
+      <DependentUpon>201805191636337_AddImageWithWaterMarkPath.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805200427483_AddBuyEntity.cs" />
+    <Compile Include="Migrations\201805200427483_AddBuyEntity.Designer.cs">
+      <DependentUpon>201805200427483_AddBuyEntity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OfferingRepository.cs" />
+    <Compile Include="OfferingsCategoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PurchasedSubscribeRepository.cs" />
     <Compile Include="PurchaseRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="SelfieFriendContext.cs" />
+    <Compile Include="SubscribePlanRepository.cs" />
+    <Compile Include="UserBuyOfferingReporsitory.cs" />
     <Compile Include="UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +146,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201707190656360_AddMessageEntity.resx">
       <DependentUpon>201707190656360_AddMessageEntity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805060914466_AddOfferingsCategory.resx">
+      <DependentUpon>201805060914466_AddOfferingsCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805060949102_FillOfferingsCategories.resx">
+      <DependentUpon>201805060949102_FillOfferingsCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805061027595_OfferingToOfferingCategoryRelations.resx">
+      <DependentUpon>201805061027595_OfferingToOfferingCategoryRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805061137246_AddPurchasedSubscribe.resx">
+      <DependentUpon>201805061137246_AddPurchasedSubscribe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091355269_AddSubscribes.resx">
+      <DependentUpon>201805091355269_AddSubscribes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091409119_FillPlans.resx">
+      <DependentUpon>201805091409119_FillPlans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805171208073_AddNewFieldToSubscribes.resx">
+      <DependentUpon>201805171208073_AddNewFieldToSubscribes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805191636337_AddImageWithWaterMarkPath.resx">
+      <DependentUpon>201805191636337_AddImageWithWaterMarkPath.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805200427483_AddBuyEntity.resx">
+      <DependentUpon>201805200427483_AddBuyEntity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

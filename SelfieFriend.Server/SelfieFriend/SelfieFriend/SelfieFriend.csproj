@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -224,8 +225,12 @@
     <Compile Include="Controllers\AuthorizeController.cs" />
     <Compile Include="Controllers\InquiriesController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Controllers\OfferingsCategoryController.cs" />
     <Compile Include="Controllers\OfferingsController.cs" />
     <Compile Include="Controllers\PurchasesController.cs" />
+    <Compile Include="Controllers\SaleOfferingController.cs" />
+    <Compile Include="Controllers\SubscribePlanController.cs" />
+    <Compile Include="Controllers\UserBuyOfferingController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -242,6 +247,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="Content\photos\co1.png" />
+    <Content Include="Content\photos\co.png" />
+    <Content Include="Content\photos\moby.jpg" />
     <Content Include="Content\photos\81521ef4-d66a-4d67-88d9-aec341cd36f9.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

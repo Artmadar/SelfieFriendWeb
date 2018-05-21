@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using SelfieFriend.Domain.Core;
 using SelfieFriend.Models;
 using SelfieFriend.Services.Interface;
 
@@ -26,7 +27,7 @@ namespace SelfieFriend.Controllers
         {
             string hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.Get(hostPort, UserId);
+            return _offeringService.Get(hostPort, UserId, OfferingType.Selfie);
         }
 
         /// <summary>
@@ -41,7 +42,7 @@ namespace SelfieFriend.Controllers
         {
             var hostPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.Get(hostPort, UserId, startPosition, count);
+            return _offeringService.Get(hostPort, UserId, startPosition, count, OfferingType.Selfie);
         }
 
 
@@ -51,7 +52,7 @@ namespace SelfieFriend.Controllers
         {
             string hostWithPort = Request.RequestUri.Host + ":" + Request.RequestUri.Port;
 
-            return _offeringService.GetUserOfferings(hostWithPort, UserId);
+            return _offeringService.GetUserOfferings(hostWithPort, UserId, OfferingType.Selfie);
         }
 
 
@@ -70,12 +71,12 @@ namespace SelfieFriend.Controllers
 
             if (string.IsNullOrEmpty(model.Photo))
             {
-                _offeringService.OfferChange(model.Id, UserId, model.Cost, model.Description, model.Title);
+                _offeringService.OfferChange(model.Id, UserId, model.Cost, model.Description, model.Title, model.CategoryId);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
 
             var fileName = _fileService.ImageDecodeAndSave(model.Photo);
-            _offeringService.OfferChange(model.Id, "Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title);
+            _offeringService.OfferChange(model.Id, "Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title,model.CategoryId);
 
             return Request.CreateResponse(HttpStatusCode.OK);
         }
@@ -93,7 +94,7 @@ namespace SelfieFriend.Controllers
             var fileName = _fileService.ImageDecodeAndSave(model.Photo);
 
 
-            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title);
+            _offeringService.Create("Content/photos/" + fileName, UserId, model.Cost, model.Description, model.Title, model.CategoryId, OfferingType.Selfie);
 
            var offer = _offeringService.GetOfferingByFilePath("Content/photos/" + fileName,
                 Request.RequestUri.Host + ":" + Request.RequestUri.Port);
